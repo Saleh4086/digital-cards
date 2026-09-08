@@ -1,0 +1,31 @@
+LUXURY DIGITAL CARD BUILDER — ETSY PRODUCT PROTOTYPE
+
+HOW THE BUYER USES IT
+1. Open index.html in a browser.
+2. Fill in name, title, phone, email, website and social links.
+3. Upload a photo or logo if desired.
+4. Pick accent/background colors.
+5. Click Download Card.
+6. Upload the downloaded HTML file to a web host.
+7. Share the live URL or QR code.
+
+WORKING FEATURES
+- Live visual editor
+- Photo/logo upload
+- Call
+- Text
+- Email
+- Website
+- Listings / Portfolio
+- Appointment booking link
+- Instagram
+- LinkedIn
+- Save Contact (.vcf)
+- Share card
+- QR code
+- Color customization
+- Browser auto-save using localStorage
+- Customized standalone HTML export
+
+NEXT COMMERCIAL UPGRADE
+For the final Etsy product, add a hosted one-click publishing option and a short branded setup guide/video so buyers do not need to understand hosting.
