@@ -1,115 +1,42 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111111">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-192.png">
-<title>Digital Business Card</title>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111111"><link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png"><title>Digital Business Card</title>
 <style>
 :root{--g:#B79A63;--b:#111111;--t:#f7f4ee;--m:#aaa49b;--line:rgba(183,154,99,.34)}
-*{box-sizing:border-box}
-body{margin:0;background:#090909;color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;display:flex;justify-content:center}
-.card{width:min(100%,460px);min-height:100vh;background:var(--b);padding:26px 22px 32px;position:relative;overflow:hidden}
-.card:before{content:"";position:absolute;width:170px;height:170px;border:1px solid var(--line);border-radius:50%;right:-75px;top:-78px}
-.identity{display:flex;gap:16px;align-items:center;margin:8px 0 22px;position:relative}
-.avatar{width:84px;height:84px;border:1px solid var(--g);border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--g);font:30px Georgia,serif;background:#151515;flex:0 0 auto}
-.avatar img{width:100%;height:100%;object-fit:cover}
-.eyebrow{font-size:10px;letter-spacing:2.7px;color:var(--g);text-transform:uppercase;margin-bottom:8px}
-h1{font:500 31px/1.03 Georgia,serif;margin:0 0 7px}.role{color:var(--m);font-size:14px}
-.save{width:100%;border:0;background:var(--g);color:#111;border-radius:14px;padding:15px;font-weight:800;letter-spacing:.4px;margin-bottom:15px}
-.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:15px}
-.quick a{text-decoration:none;color:white;text-align:center;border:1px solid #303030;border-radius:14px;padding:14px 6px;font-size:12px;font-weight:700;background:#121212}
-.icon{width:22px;height:22px;display:block;margin:0 auto 6px;stroke:var(--g);fill:none;stroke-width:1.8}
-.links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:white;border-top:1px solid #2b2b2b;padding:17px 2px}
-.links b{font-size:14px}.links small{display:block;color:var(--m);margin-top:4px;font-size:12px}.arrow{color:var(--g);font-size:21px}
-.share,.install{width:100%;border-radius:13px;padding:13px;font-weight:800;margin-top:12px}
-.share{background:transparent;border:1px solid var(--line);color:var(--g)}
-.install{background:#1b1b1b;border:1px solid #333;color:white;display:none}
-.qr{border-top:1px solid #2b2b2b;margin-top:18px;padding-top:18px;display:flex;gap:15px;align-items:center}
-.qr img{width:90px;height:90px;background:white;padding:6px;border-radius:10px}.qr p{margin:0;color:var(--m);font-size:12px;line-height:1.5}.qr b{color:white}
-.tip{font-size:11px;color:#777;text-align:center;margin-top:18px}
-</style>
-</head>
-<body>
+*{box-sizing:border-box}body{margin:0;background:#090909;color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;display:flex;justify-content:center}
+.card{width:min(100%,460px);min-height:100vh;background:var(--b);padding:18px 22px 32px;position:relative;overflow:hidden}
+.topbar{display:flex;justify-content:flex-end;margin-bottom:8px}
+.editbtn{font-size:11px;letter-spacing:.8px;text-decoration:none;color:var(--g);border:1px solid var(--line);padding:8px 11px;border-radius:9px}
+.card:before{content:"";position:absolute;width:170px;height:170px;border:1px solid var(--line);border-radius:50%;right:-75px;top:-78px;pointer-events:none}
+.identity{display:flex;gap:16px;align-items:center;margin:8px 0 22px;position:relative}.avatar{width:84px;height:84px;border:1px solid var(--g);border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--g);font:30px Georgia,serif;background:#151515;flex:0 0 auto}.avatar img{width:100%;height:100%;object-fit:cover}
+.eyebrow{font-size:10px;letter-spacing:2.7px;color:var(--g);text-transform:uppercase;margin-bottom:8px}h1{font:500 31px/1.03 Georgia,serif;margin:0 0 7px}.role{color:var(--m);font-size:14px}
+.save{width:100%;border:0;background:var(--g);color:#111;border-radius:14px;padding:15px;font-weight:800;letter-spacing:.4px;margin-bottom:15px}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:15px}.quick a{text-decoration:none;color:white;text-align:center;border:1px solid #303030;border-radius:14px;padding:14px 6px;font-size:12px;font-weight:700;background:#121212}
+.links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:white;border-top:1px solid #2b2b2b;padding:17px 2px}.links b{font-size:14px}.links small{display:block;color:var(--m);margin-top:4px;font-size:12px}.arrow{color:var(--g);font-size:21px}
+.share,.install{width:100%;border-radius:13px;padding:13px;font-weight:800;margin-top:12px}.share{background:transparent;border:1px solid var(--line);color:var(--g)}.install{background:#1b1b1b;border:1px solid #333;color:white;display:none}
+.qr{border-top:1px solid #2b2b2b;margin-top:18px;padding-top:18px;display:flex;gap:15px;align-items:center}.qr img{width:90px;height:90px;background:white;padding:6px;border-radius:10px}.qr p{margin:0;color:var(--m);font-size:12px;line-height:1.5}.qr b{color:white}.tip{font-size:11px;color:#777;text-align:center;margin-top:18px}
+</style></head><body>
 <main class="card">
-  <div class="identity">
-    <div class="avatar" id="avatar">AR</div>
-    <div>
-      <div class="eyebrow" id="specialty"></div>
-      <h1 id="name"></h1>
-      <div class="role" id="title"></div>
-    </div>
-  </div>
-
-  <button class="save" id="saveBtn">SAVE CONTACT</button>
-
-  <div class="quick">
-    <a id="call"><svg class="icon" viewBox="0 0 24 24"><path d="M6.6 10.8c1.7 3.4 3.2 4.9 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.7 3.8.7.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3.7c0-.6.4-1 1-1h3.3c.6 0 1 .4 1 1 0 1.3.2 2.6.7 3.8.1.4 0 .8-.2 1.1l-2.2 2.2Z"/></svg>Call</a>
-    <a id="text"><svg class="icon" viewBox="0 0 24 24"><path d="M4 5h16v11H7l-3 3V5Z"/></svg>Text</a>
-    <a id="email"><svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg>Email</a>
-  </div>
-
-  <div class="links">
-    <a id="website"><div><b>Website</b><small id="websiteLabel"></small></div><span class="arrow">→</span></a>
-    <a id="listings"><div><b>My Listings / Portfolio</b><small>View current work</small></div><span class="arrow">→</span></a>
-    <a id="booking"><div><b>Book an Appointment</b><small>Schedule a consultation</small></div><span class="arrow">→</span></a>
-    <a id="instagram"><div><b>Instagram</b><small id="instagramHandle"></small></div><span class="arrow">→</span></a>
-    <a id="linkedin"><div><b>LinkedIn</b><small>Connect professionally</small></div><span class="arrow">→</span></a>
-  </div>
-
-  <button class="share" id="shareBtn">SHARE MY CARD</button>
-  <button class="install" id="installBtn">ADD CARD TO HOME SCREEN</button>
-
-  <div class="qr">
-    <img id="qr" alt="QR code">
-    <p><b>Scan to open this card</b><br>This QR automatically points to the live card URL after publishing.</p>
-  </div>
-  <div class="tip">On iPhone: Share → Add to Home Screen saves the card like an app.</div>
+<div class="topbar"><a class="editbtn" href="editor.html">EDIT MY CARD</a></div>
+<div class="identity"><div class="avatar" id="avatar">AR</div><div><div class="eyebrow" id="specialty"></div><h1 id="name"></h1><div class="role" id="title"></div></div></div>
+<button class="save" id="saveBtn">SAVE CONTACT</button>
+<div class="quick"><a id="call">Call</a><a id="text">Text</a><a id="email">Email</a></div>
+<div class="links">
+<a id="website"><div><b>Website</b><small id="websiteLabel"></small></div><span class="arrow">→</span></a>
+<a id="listings"><div><b>My Listings / Portfolio</b><small>View current work</small></div><span class="arrow">→</span></a>
+<a id="booking"><div><b>Book an Appointment</b><small>Schedule a consultation</small></div><span class="arrow">→</span></a>
+<a id="instagram"><div><b>Instagram</b><small id="instagramHandle"></small></div><span class="arrow">→</span></a>
+<a id="linkedin"><div><b>LinkedIn</b><small>Connect professionally</small></div><span class="arrow">→</span></a></div>
+<button class="share" id="shareBtn">SHARE MY CARD</button><button class="install" id="installBtn">ADD CARD TO HOME SCREEN</button>
+<div class="qr"><img id="qr"><p><b>Scan to open this card</b><br>QR points to the live card URL after publishing.</p></div>
+<div class="tip">On iPhone: Share → Add to Home Screen.</div>
 </main>
 <script>
-let P={}, deferredPrompt=null;
-const $=id=>document.getElementById(id);
-fetch('profile.json').then(r=>r.json()).then(p=>{P=p;render()});
-function render(){
-  document.documentElement.style.setProperty('--g',P.accent||'#B79A63');
-  document.documentElement.style.setProperty('--b',P.background||'#111111');
-  $('name').textContent=P.name||'';
-  $('title').textContent=P.title||'';
-  $('specialty').textContent=P.specialty||'';
-  $('websiteLabel').textContent=P.websiteLabel||P.website||'';
-  $('instagramHandle').textContent=P.instagramHandle||'';
-  $('call').href='tel:'+(P.phone||'');
-  $('text').href='sms:'+(P.phone||'');
-  $('email').href='mailto:'+(P.email||'');
-  for (const k of ['website','listings','booking','instagram','linkedin']) {
-    $(k).href=P[k]||'#'; $(k).target='_blank'; $(k).rel='noopener';
-  }
-  if(P.photo){$('avatar').innerHTML='<img alt="" src="'+P.photo+'">'} else $('avatar').textContent=P.monogram||'AR';
-  $('qr').src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(location.href);
-  document.title=(P.name||'Digital')+' | Digital Card';
-}
-$('saveBtn').onclick=()=>{
-  const parts=(P.name||'').trim().split(/\s+/), last=parts.pop()||'', first=parts.join(' ');
-  const v=`BEGIN:VCARD
-VERSION:3.0
-N:${last};${first};;;
-FN:${P.name||''}
-TITLE:${P.title||''}
-TEL;TYPE=CELL:${P.phone||''}
-EMAIL:${P.email||''}
-URL:${P.website||''}
-END:VCARD`;
-  const b=new Blob([v],{type:'text/vcard'}),a=document.createElement('a');
-  a.href=URL.createObjectURL(b);a.download=(P.name||'contact').replace(/\s+/g,'-')+'.vcf';a.click();URL.revokeObjectURL(a.href);
-};
-$('shareBtn').onclick=async()=>{
-  if(navigator.share){try{await navigator.share({title:document.title,text:'Save my digital business card',url:location.href})}catch(e){}}
-  else {try{await navigator.clipboard.writeText(location.href);alert('Card link copied.')}catch(e){alert(location.href)}}
-};
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').style.display='block'});
-$('installBtn').onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$('installBtn').style.display='none'}};
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
-</script>
-</body></html>
+let P={},deferredPrompt=null,$=id=>document.getElementById(id);
+async function load(){let local=localStorage.getItem('cardProfile');if(local){P=JSON.parse(local)}else{P=await fetch('profile.json').then(r=>r.json())}render()}
+function render(){document.documentElement.style.setProperty('--g',P.accent||'#B79A63');document.documentElement.style.setProperty('--b',P.background||'#111111');$('name').textContent=P.name||'';$('title').textContent=P.title||'';$('specialty').textContent=P.specialty||'';$('websiteLabel').textContent=P.websiteLabel||P.website||'';$('instagramHandle').textContent=P.instagramHandle||'';$('call').href='tel:'+(P.phone||'');$('text').href='sms:'+(P.phone||'');$('email').href='mailto:'+(P.email||'');for(const k of ['website','listings','booking','instagram','linkedin']){$(k).href=P[k]||'#';$(k).target='_blank'}$('avatar').innerHTML=P.photo?'<img src="'+P.photo+'">':(P.monogram||'AR');$('qr').src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(location.href);document.title=(P.name||'Digital')+' | Digital Card'}
+$('saveBtn').onclick=()=>{const v=`BEGIN:VCARD\nVERSION:3.0\nFN:${P.name||''}\nTITLE:${P.title||''}\nTEL;TYPE=CELL:${P.phone||''}\nEMAIL:${P.email||''}\nURL:${P.website||''}\nEND:VCARD`;const b=new Blob([v],{type:'text/vcard'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(P.name||'contact').replace(/\s+/g,'-')+'.vcf';a.click()}
+$('shareBtn').onclick=async()=>{if(navigator.share){try{await navigator.share({title:document.title,url:location.href})}catch(e){}}else{navigator.clipboard&&navigator.clipboard.writeText(location.href)}}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').style.display='block'});$('installBtn').onclick=()=>deferredPrompt&&deferredPrompt.prompt();load();
+</script></body></html>

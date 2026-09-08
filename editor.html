@@ -1,38 +1,17 @@
-<!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Edit Your Digital Card</title>
+<!doctype html><html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Edit My Digital Card</title>
 <style>
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;background:#101010;color:#eee;margin:0;padding:24px}
-main{max-width:720px;margin:auto}h1{font-family:Georgia,serif;font-weight:500}p{color:#aaa;line-height:1.5}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}
-label{font-size:12px;color:#bbb;display:block;margin:10px 0 5px}input{width:100%;box-sizing:border-box;padding:12px;background:#181818;border:1px solid #333;border-radius:9px;color:#fff}
-button{margin-top:20px;padding:14px 18px;background:#B79A63;border:0;border-radius:10px;font-weight:800}
-pre{background:#171717;padding:15px;border-radius:10px;overflow:auto;color:#ddd}
-@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
-</style></head><body><main>
-<h1>Card Setup</h1>
-<p>Fill in your information, then click <b>Generate profile.json</b>. Replace the sample profile.json in the website folder with the downloaded file and publish the folder.</p>
-<div class="grid">
-<div><label>Name</label><input id="name" value="Alexandra Reed"></div>
-<div><label>Title</label><input id="title" value="Real Estate Advisor"></div>
-<div><label>Business / Specialty</label><input id="specialty" value="Luxury Real Estate"></div>
-<div><label>Monogram</label><input id="monogram" value="AR"></div>
-<div><label>Phone</label><input id="phone" value="+15551234567"></div>
-<div><label>Email</label><input id="email" value="hello@yourbrand.com"></div>
-<div class="full"><label>Website</label><input id="website" value="https://example.com"></div>
-<div><label>Website Label</label><input id="websiteLabel" value="yourwebsite.com"></div>
-<div><label>Listings / Portfolio</label><input id="listings" value="https://example.com/listings"></div>
-<div><label>Booking Link</label><input id="booking" value="https://example.com/book"></div>
-<div><label>Instagram URL</label><input id="instagram" value="https://instagram.com/"></div>
-<div><label>Instagram Handle</label><input id="instagramHandle" value="@yourhandle"></div>
-<div><label>LinkedIn URL</label><input id="linkedin" value="https://linkedin.com/"></div>
-<div><label>Accent Color</label><input id="accent" value="#B79A63"></div>
-<div><label>Background</label><input id="background" value="#111111"></div>
-<div class="full"><label>Photo URL (optional)</label><input id="photo" placeholder="https://..."></div>
-</div>
-<button onclick="go()">GENERATE profile.json</button>
-<pre id="preview"></pre>
+:root{--g:#B79A63}*{box-sizing:border-box}body{margin:0;background:#0e0e0e;color:#eee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.wrap{max-width:760px;margin:auto;padding:24px}h1{font:500 34px Georgia,serif;margin:0 0 7px}.sub{color:#aaa;margin-bottom:22px}.sec{border-top:1px solid #2a2a2a;padding-top:18px;margin-top:18px}h2{font-size:12px;letter-spacing:2px;color:var(--g);text-transform:uppercase}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;font-size:12px;color:#bbb;margin:8px 0 6px}input{width:100%;padding:12px;border-radius:10px;border:1px solid #333;background:#171717;color:white}input[type=color]{height:46px;padding:5px}.full{grid-column:1/-1}.buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}button,a.btn{padding:14px;border-radius:11px;font-weight:800;text-align:center;text-decoration:none}.save{background:var(--g);color:#111;border:0}.view{background:#1c1c1c;color:#fff;border:1px solid #333}.photoPreview{width:92px;height:92px;border:1px solid var(--g);border-radius:18px;object-fit:cover;display:none;margin-top:10px}@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+</style></head><body><div class="wrap"><h1>Edit My Card</h1><div class="sub">Change anything below. Tap Save Changes, then View Card.</div>
+<div class="sec"><h2>Identity</h2><div class="grid"><div><label>Name</label><input id="name"></div><div><label>Title</label><input id="title"></div><div><label>Business / Specialty</label><input id="specialty"></div><div><label>Monogram</label><input id="monogram"></div><div class="full"><label>Upload Photo or Logo</label><input id="photoFile" type="file" accept="image/*"><img id="photoPreview" class="photoPreview"></div></div></div>
+<div class="sec"><h2>Contact</h2><div class="grid"><div><label>Phone</label><input id="phone"></div><div><label>Email</label><input id="email"></div><div class="full"><label>Website URL</label><input id="website"></div><div><label>Website Label</label><input id="websiteLabel"></div><div><label>Listings / Portfolio</label><input id="listings"></div><div><label>Booking Link</label><input id="booking"></div><div><label>Instagram URL</label><input id="instagram"></div><div><label>Instagram Handle</label><input id="instagramHandle"></div><div class="full"><label>LinkedIn URL</label><input id="linkedin"></div></div></div>
+<div class="sec"><h2>Colors</h2><div class="grid"><div><label>Accent Color</label><input id="accent" type="color"></div><div><label>Background Color</label><input id="background" type="color"></div></div></div>
+<div class="buttons"><button class="save" onclick="save()">SAVE CHANGES</button><a class="btn view" href="index.html">VIEW CARD</a></div></div>
 <script>
-const ids=['name','title','specialty','monogram','phone','email','website','websiteLabel','listings','booking','instagram','instagramHandle','linkedin','accent','background','photo'];
-function go(){let p={};ids.forEach(i=>p[i]=document.getElementById(i).value.trim());let s=JSON.stringify(p,null,2);preview.textContent=s;let b=new Blob([s],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='profile.json';a.click();URL.revokeObjectURL(a.href)}
-</script></main></body></html>
+const ids=['name','title','specialty','monogram','phone','email','website','websiteLabel','listings','booking','instagram','instagramHandle','linkedin','accent','background'];let P={};
+async function init(){let l=localStorage.getItem('cardProfile');P=l?JSON.parse(l):await fetch('profile.json').then(r=>r.json());ids.forEach(i=>document.getElementById(i).value=P[i]||'');if(P.photo){photoPreview.src=P.photo;photoPreview.style.display='block'}document.documentElement.style.setProperty('--g',P.accent||'#B79A63')}
+photoFile.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=x=>{P.photo=x.target.result;photoPreview.src=P.photo;photoPreview.style.display='block'};r.readAsDataURL(f)}
+accent.oninput=e=>document.documentElement.style.setProperty('--g',e.target.value);
+function save(){ids.forEach(i=>P[i]=document.getElementById(i).value.trim());localStorage.setItem('cardProfile',JSON.stringify(P));alert('Saved. Tap VIEW CARD to see your changes.')}
+init();
+</script></body></html>

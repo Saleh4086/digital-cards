@@ -1,21 +1,6 @@
-LUXURY DIGITAL BUSINESS CARD - PROTOTYPE
-
-This is a working single-page digital business card template.
-
-Included functions:
-- Call
-- Text
-- Email
-- Website
-- Listings
-- Appointment link
-- Instagram
-- LinkedIn
-- Save Contact (.vcf)
-- Share card
-- QR code
-
-Open index.html in a browser to preview.
-
-For an Etsy-ready product, the next step is to make customization easier so buyers can replace:
-name, title, logo/monogram, phone, email, website, social links, appointment link, QR destination, and colors.
+V4 FIX:
+Open index.html for the card.
+Tap EDIT MY CARD at the top to open the editor.
+Change name, title, phone, email, website, links, photo/logo, accent color and background.
+Tap SAVE CHANGES, then VIEW CARD.
+Changes are stored in the browser using localStorage for easy testing.
