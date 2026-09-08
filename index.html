@@ -1,80 +1,264 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Luxury Digital Card Builder</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Luxury Digital Card Setup Wizard</title>
 <style>
-:root{--g:#B79A63;--b:#111;--t:#f6f3ee;--m:#aaa}
-*{box-sizing:border-box}body{margin:0;background:#090909;color:var(--t);font-family:Arial,sans-serif}
-.shell{max-width:1100px;margin:auto;display:grid;grid-template-columns:380px 1fr;min-height:100vh}
-.editor{padding:22px;background:#101010;border-right:1px solid #2a2a2a;overflow:auto}
-.editor h1{font-family:Georgia,serif;font-weight:500}.editor p{color:#aaa;font-size:13px}
-.sec{border-top:1px solid #292929;margin-top:16px;padding-top:14px}.sec h2{font-size:11px;letter-spacing:2px;color:var(--g);text-transform:uppercase}
-label{display:block;font-size:11px;color:#bbb;margin:8px 0 5px}input{width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#171717;color:white}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}
-button{padding:12px;border-radius:10px;font-weight:800;border:0}.primary{background:var(--g);color:#111}.secondary{background:#1c1c1c;color:white;border:1px solid #333}
-.previewWrap{padding:24px;display:flex;justify-content:center;align-items:flex-start}.card{width:min(100%,460px);background:var(--b);min-height:100vh;padding:22px}
-.identity{display:flex;gap:16px;align-items:center;margin-bottom:22px}.avatar{width:84px;height:84px;border:1px solid var(--g);border-radius:20px;display:flex;align-items:center;justify-content:center;color:var(--g);font:30px Georgia,serif;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}
-.eyebrow{font-size:10px;letter-spacing:2.5px;color:var(--g);text-transform:uppercase;margin-bottom:8px}h3{font:500 31px Georgia,serif;margin:0 0 7px}.role{color:var(--m)}
-.save{width:100%;background:var(--g);margin-bottom:15px}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.quick a{padding:14px;text-align:center;border:1px solid #303030;border-radius:14px;color:white;text-decoration:none;background:#121212}
-.links a{display:flex;justify-content:space-between;padding:17px 2px;border-top:1px solid #2b2b2b;color:white;text-decoration:none}.links small{display:block;color:var(--m);margin-top:4px}.arrow{color:var(--g)}
-.share{width:100%;margin-top:12px;background:transparent;color:var(--g);border:1px solid var(--g)}.qr{border-top:1px solid #2b2b2b;margin-top:18px;padding-top:18px;display:flex;gap:15px;align-items:center}.qr img{width:90px;height:90px;background:white;padding:6px;border-radius:10px}.qr p{font-size:12px;color:var(--m)}
-.mobileEdit{display:none}
-@media(max-width:820px){.shell{grid-template-columns:1fr}.editor{display:none}.editor.open{display:block}.previewWrap{padding:0}.mobileEdit{display:block;position:sticky;top:0;z-index:9;background:#111;padding:10px}.mobileEdit button{width:100%;background:var(--g)}}
-</style></head><body>
-<div class="mobileEdit"><button onclick="document.getElementById('editor').classList.toggle('open')">EDIT MY CARD</button></div>
-<div class="shell">
-<aside class="editor" id="editor"><h1>Edit My Card</h1><p>Change anything below. The card updates immediately.</p>
-<div class="sec"><h2>Identity</h2>
-<label>Name</label><input id="name" value="Alexandra Reed">
-<label>Title</label><input id="title" value="Real Estate Advisor">
-<label>Business / Specialty</label><input id="specialty" value="Luxury Real Estate">
-<label>Monogram</label><input id="monogram" value="AR">
-<label>Photo or Logo</label><input id="photo" type="file" accept="image/*"></div>
-<div class="sec"><h2>Contact</h2>
-<label>Phone</label><input id="phone" value="+15551234567">
-<label>Email</label><input id="email" value="hello@yourbrand.com">
-<label>Website URL</label><input id="website" value="https://example.com">
-<label>Website Label</label><input id="websiteLabel" value="yourwebsite.com"></div>
-<div class="sec"><h2>Links</h2>
-<label>Listings / Portfolio</label><input id="listings" value="https://example.com/listings">
-<label>Booking Link</label><input id="booking" value="https://example.com/book">
-<label>Instagram URL</label><input id="instagram" value="https://instagram.com/">
-<label>Instagram Handle</label><input id="instagramHandle" value="@yourhandle">
-<label>LinkedIn URL</label><input id="linkedin" value="https://linkedin.com/"></div>
-<div class="sec"><h2>Colors</h2><div class="grid">
-<div><label>Accent</label><input id="accent" type="color" value="#B79A63"></div>
-<div><label>Background</label><input id="background" type="color" value="#111111"></div></div></div>
-<div class="actions"><button class="secondary" onclick="resetCard()">RESET</button><button class="primary" onclick="saveCard()">SAVE CHANGES</button></div>
-</aside>
-<section class="previewWrap"><main class="card" id="card">
-<div class="identity"><div class="avatar" id="avatar">AR</div><div><div class="eyebrow" id="specialtyPreview">Luxury Real Estate</div><h3 id="namePreview">Alexandra Reed</h3><div class="role" id="titlePreview">Real Estate Advisor</div></div></div>
-<button class="save" onclick="downloadVCF()">SAVE CONTACT</button>
-<div class="quick"><a id="callLink">Call</a><a id="textLink">Text</a><a id="emailLink">Email</a></div>
-<div class="links">
-<a id="websiteLink"><div><b>Website</b><small id="websiteLabelPreview">yourwebsite.com</small></div><span class="arrow">→</span></a>
-<a id="listingsLink"><div><b>My Listings / Portfolio</b><small>View current work</small></div><span class="arrow">→</span></a>
-<a id="bookingLink"><div><b>Book an Appointment</b><small>Schedule a consultation</small></div><span class="arrow">→</span></a>
-<a id="instagramLink"><div><b>Instagram</b><small id="instagramPreview">@yourhandle</small></div><span class="arrow">→</span></a>
-<a id="linkedinLink"><div><b>LinkedIn</b><small>Connect professionally</small></div><span class="arrow">→</span></a></div>
-<button class="share" onclick="shareCard()">SHARE MY CARD</button>
-<div class="qr"><img id="qr"><p><b>Scan to open this card</b><br>QR points to the current card URL.</p></div>
-</main></section></div>
+:root{
+  --accent:#B79A63;--bg:#111111;--panel:#171717;--text:#F7F4EE;--muted:#A9A39A;
+  --line:rgba(183,154,99,.35);--soft:#202020
+}
+*{box-sizing:border-box}
+body{margin:0;background:#0b0b0b;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.app{min-height:100vh;display:grid;grid-template-columns:minmax(360px,470px) 1fr}
+.wizard{background:#101010;border-right:1px solid #282828;padding:24px;overflow:auto}
+.brand{font:500 31px Georgia,serif;margin:0 0 6px}.subtitle{color:#aaa;font-size:13px;line-height:1.5;margin-bottom:20px}
+.progress{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:20px}
+.stepdot{height:5px;border-radius:99px;background:#272727}.stepdot.active{background:var(--accent)}
+.step{display:none}.step.active{display:block}
+.step h2{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin:0 0 14px}
+.themegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.theme{
+  border:1px solid #343434;background:#171717;border-radius:14px;padding:10px;cursor:pointer;
+  transition:.15s;min-height:120px
+}
+.theme.selected{outline:2px solid var(--accent);border-color:transparent}
+.swatch{height:70px;border-radius:10px;margin-bottom:8px;position:relative;overflow:hidden}
+.swatch:after{content:"";position:absolute;right:-20px;top:-26px;width:78px;height:78px;border:1px solid rgba(255,255,255,.25);border-radius:50%}
+.theme b{font-size:13px}.theme small{display:block;color:#999;margin-top:3px}
+label{display:block;font-size:11px;color:#bbb;margin:9px 0 5px}
+input,select{width:100%;padding:11px 12px;border-radius:9px;border:1px solid #333;background:#171717;color:#fff}
+input[type=color]{height:44px;padding:5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.uploadBox{border:1px dashed #444;border-radius:12px;padding:13px;background:#151515}
+.photoMini{width:74px;height:74px;border-radius:16px;object-fit:cover;border:1px solid var(--accent);display:none;margin-top:10px}
+.nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+button{padding:13px;border-radius:11px;font-weight:800;border:0;cursor:pointer}
+.back{background:#1b1b1b;color:white;border:1px solid #333}
+.next{background:var(--accent);color:#111}
+.previewArea{padding:28px;display:flex;justify-content:center;align-items:flex-start;background:radial-gradient(circle at 50% 0%,rgba(183,154,99,.08),transparent 40%),#0a0a0a}
+.card{width:min(100%,450px);background:var(--bg);padding:24px;border-radius:28px;border:1px solid var(--line);box-shadow:0 28px 80px rgba(0,0,0,.45);position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;width:170px;height:170px;border:1px solid var(--line);border-radius:50%;right:-75px;top:-78px}
+.identity{display:flex;gap:16px;align-items:center;margin:8px 0 22px;position:relative}
+.avatar{width:84px;height:84px;border:1px solid var(--accent);border-radius:20px;display:flex;align-items:center;justify-content:center;color:var(--accent);font:30px Georgia,serif;overflow:hidden;flex:0 0 auto;background:var(--panel)}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.eyebrow{font-size:10px;letter-spacing:2.7px;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+.name{font:500 31px/1.03 Georgia,serif;margin:0 0 7px}.role{color:var(--muted);font-size:14px}
+.save{width:100%;background:var(--accent);color:#111;border-radius:14px;padding:15px;margin-bottom:15px}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.quick a{text-decoration:none;color:var(--text);text-align:center;border:1px solid #303030;border-radius:14px;padding:14px 6px;background:rgba(18,18,18,.72);font-size:12px;font-weight:700}
+.links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:var(--text);border-top:1px solid #2b2b2b;padding:17px 2px}
+.links small{display:block;color:var(--muted);margin-top:4px}.arrow{color:var(--accent)}
+.share{width:100%;margin-top:12px;background:transparent;color:var(--accent);border:1px solid var(--line)}
+.qr{border-top:1px solid #2b2b2b;margin-top:18px;padding-top:18px;display:flex;gap:15px;align-items:center}
+.qr img{width:90px;height:90px;background:white;padding:6px;border-radius:10px}.qr p{font-size:12px;color:var(--muted);line-height:1.5}.qr b{color:var(--text)}
+.summary{background:#151515;border:1px solid #2c2c2c;border-radius:12px;padding:14px;color:#ccc;font-size:13px;line-height:1.6}
+.finishActions{display:grid;gap:10px;margin-top:14px}
+.finishActions button{width:100%}.ghost{background:#1b1b1b;color:white;border:1px solid #333}
+.notice{font-size:11px;color:#888;line-height:1.5;margin-top:10px}
+.badge{display:inline-block;border:1px solid var(--line);color:var(--accent);border-radius:99px;padding:5px 8px;font-size:10px;margin-bottom:10px}
+@media(max-width:860px){
+  .app{grid-template-columns:1fr}
+  .wizard{border-right:0;border-bottom:1px solid #282828}
+  .previewArea{padding:16px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="wizard">
+    <div class="badge">CUSTOMER SETUP WIZARD v7</div>
+    <h1 class="brand">Create Your Digital Card</h1>
+    <div class="subtitle">Choose a style, enter your details, preview the card, then save your finished setup.</div>
+    <div class="progress">
+      <div class="stepdot active"></div><div class="stepdot"></div><div class="stepdot"></div><div class="stepdot"></div><div class="stepdot"></div>
+    </div>
+
+    <section class="step active" data-step="1">
+      <h2>1. Choose Your Design</h2>
+      <div class="themegrid">
+        <div class="theme selected" data-theme="blackGold">
+          <div class="swatch" style="background:linear-gradient(135deg,#111 0 72%,#B79A63 72%)"></div>
+          <b>Black + Champagne</b><small>Luxury / Real Estate / Finance</small>
+        </div>
+        <div class="theme" data-theme="navyGold">
+          <div class="swatch" style="background:linear-gradient(135deg,#111A2B 0 72%,#B79A63 72%)"></div>
+          <b>Deep Navy + Gold</b><small>Executive / Legal / Consulting</small>
+        </div>
+        <div class="theme" data-theme="emeraldGold">
+          <div class="swatch" style="background:linear-gradient(135deg,#10251F 0 72%,#B79A63 72%)"></div>
+          <b>Emerald + Gold</b><small>Wellness / Design / Boutique</small>
+        </div>
+        <div class="theme" data-theme="lightLuxury">
+          <div class="swatch" style="background:linear-gradient(135deg,#F2EFE8 0 72%,#252525 72%)"></div>
+          <b>Light Luxury</b><small>Modern / Beauty / Creative</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" data-step="2">
+      <h2>2. Your Information</h2>
+      <label>Name</label><input id="name" value="Alexandra Reed">
+      <label>Title</label><input id="title" value="Real Estate Advisor">
+      <label>Business / Specialty</label><input id="specialty" value="Luxury Real Estate">
+      <label>Monogram</label><input id="monogram" value="AR" maxlength="4">
+      <div class="uploadBox">
+        <label>Photo or Logo</label><input id="photo" type="file" accept="image/*">
+        <img id="photoMini" class="photoMini">
+      </div>
+    </section>
+
+    <section class="step" data-step="3">
+      <h2>3. Contact & Links</h2>
+      <div class="grid2">
+        <div><label>Phone</label><input id="phone" value="+15551234567"></div>
+        <div><label>Email</label><input id="email" value="hello@yourbrand.com"></div>
+      </div>
+      <label>Website URL</label><input id="website" value="https://example.com">
+      <label>Website Label</label><input id="websiteLabel" value="yourwebsite.com">
+      <label>Listings / Portfolio</label><input id="listings" value="https://example.com/listings">
+      <label>Booking Link</label><input id="booking" value="https://example.com/book">
+      <label>Instagram URL</label><input id="instagram" value="https://instagram.com/">
+      <label>Instagram Handle</label><input id="instagramHandle" value="@yourhandle">
+      <label>LinkedIn URL</label><input id="linkedin" value="https://linkedin.com/">
+    </section>
+
+    <section class="step" data-step="4">
+      <h2>4. Fine-Tune Your Style</h2>
+      <div class="grid2">
+        <div><label>Accent Color</label><input id="accent" type="color" value="#B79A63"></div>
+        <div><label>Background</label><input id="background" type="color" value="#111111"></div>
+      </div>
+      <label>Card Label</label><input id="cardLabel" value="Luxury Digital Card">
+      <div class="notice">You can keep the preset theme or personalize the colors further.</div>
+    </section>
+
+    <section class="step" data-step="5">
+      <h2>5. Finish</h2>
+      <div class="summary" id="summary"></div>
+      <div class="finishActions">
+        <button class="next" onclick="saveSetup()">SAVE MY SETUP</button>
+        <button class="ghost" onclick="downloadSetup()">DOWNLOAD SETUP FILE</button>
+        <button class="ghost" onclick="copyShareLink()">COPY CURRENT CARD LINK</button>
+      </div>
+      <div class="notice">For Etsy, the final commercial version can connect this wizard to a hosted publish service so customers get their own live link automatically.</div>
+    </section>
+
+    <div class="nav">
+      <button class="back" id="backBtn" onclick="prevStep()" disabled>BACK</button>
+      <button class="next" id="nextBtn" onclick="nextStep()">NEXT</button>
+    </div>
+  </aside>
+
+  <section class="previewArea">
+    <main class="card" id="card">
+      <div class="identity">
+        <div class="avatar" id="avatar">AR</div>
+        <div>
+          <div class="eyebrow" id="specialtyPreview">Luxury Real Estate</div>
+          <h2 class="name" id="namePreview">Alexandra Reed</h2>
+          <div class="role" id="titlePreview">Real Estate Advisor</div>
+        </div>
+      </div>
+      <button class="save" onclick="downloadVCF()">SAVE CONTACT</button>
+      <div class="quick">
+        <a id="callLink">Call</a><a id="textLink">Text</a><a id="emailLink">Email</a>
+      </div>
+      <div class="links">
+        <a id="websiteLink"><div><b>Website</b><small id="websiteLabelPreview">yourwebsite.com</small></div><span class="arrow">→</span></a>
+        <a id="listingsLink"><div><b>My Listings / Portfolio</b><small>View current work</small></div><span class="arrow">→</span></a>
+        <a id="bookingLink"><div><b>Book an Appointment</b><small>Schedule a consultation</small></div><span class="arrow">→</span></a>
+        <a id="instagramLink"><div><b>Instagram</b><small id="instagramPreview">@yourhandle</small></div><span class="arrow">→</span></a>
+        <a id="linkedinLink"><div><b>LinkedIn</b><small>Connect professionally</small></div><span class="arrow">→</span></a>
+      </div>
+      <button class="share" onclick="shareCard()">SHARE MY CARD</button>
+      <div class="qr">
+        <img id="qr">
+        <p><b>Scan to open this card</b><br>QR points to the current page URL during setup.</p>
+      </div>
+    </main>
+  </section>
+</div>
+
 <script>
-const ids=['name','title','specialty','monogram','phone','email','website','websiteLabel','listings','booking','instagram','instagramHandle','linkedin','accent','background'];let photoData='';
-const v=id=>document.getElementById(id).value.trim();
-function update(){document.documentElement.style.setProperty('--g',v('accent'));document.documentElement.style.setProperty('--b',v('background'));card.style.background=v('background');namePreview.textContent=v('name');titlePreview.textContent=v('title');specialtyPreview.textContent=v('specialty');websiteLabelPreview.textContent=v('websiteLabel');instagramPreview.textContent=v('instagramHandle');callLink.href='tel:'+v('phone');textLink.href='sms:'+v('phone');emailLink.href='mailto:'+v('email');websiteLink.href=v('website');listingsLink.href=v('listings');bookingLink.href=v('booking');instagramLink.href=v('instagram');linkedinLink.href=v('linkedin');if(!photoData)avatar.textContent=v('monogram')||'AR';qr.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(location.href)}
-ids.forEach(id=>document.getElementById(id).addEventListener('input',update));
-photo.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{photoData=x.target.result;avatar.innerHTML='<img src="'+photoData+'">'};r.readAsDataURL(f)});
-function saveCard(){const s={};ids.forEach(id=>s[id]=v(id));s.photoData=photoData;localStorage.setItem('digitalCardV5',JSON.stringify(s));alert('Saved')}
-function resetCard(){localStorage.removeItem('digitalCardV5');location.reload()}
-function loadCard(){const raw=localStorage.getItem('digitalCardV5');if(raw){try{const s=JSON.parse(raw);ids.forEach(id=>{if(s[id]!=null)document.getElementById(id).value=s[id]});photoData=s.photoData||'';if(photoData)avatar.innerHTML='<img src="'+photoData+'">'}catch(e){}}update()}
-function downloadVCF(){const x=`BEGIN:VCARD
+let step=1, photoData='', selectedTheme='blackGold';
+const themes={
+ blackGold:{accent:'#B79A63',background:'#111111',panel:'#171717',text:'#F7F4EE',muted:'#A9A39A'},
+ navyGold:{accent:'#B79A63',background:'#111A2B',panel:'#162033',text:'#F6F3EE',muted:'#B1B4BD'},
+ emeraldGold:{accent:'#B79A63',background:'#10251F',panel:'#16332A',text:'#F7F4EE',muted:'#B7BDB8'},
+ lightLuxury:{accent:'#9C7C4E',background:'#F2EFE8',panel:'#E8E2D8',text:'#222222',muted:'#68645F'}
+};
+const ids=['name','title','specialty','monogram','phone','email','website','websiteLabel','listings','booking','instagram','instagramHandle','linkedin','accent','background','cardLabel'];
+const $=id=>document.getElementById(id), v=id=>$(id).value.trim();
+
+document.querySelectorAll('.theme').forEach(el=>el.onclick=()=>{
+ document.querySelectorAll('.theme').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');
+ selectedTheme=el.dataset.theme;applyTheme(selectedTheme);
+});
+ids.forEach(id=>$(id).addEventListener('input',updatePreview));
+photo.addEventListener('change',e=>{
+ const f=e.target.files[0]; if(!f)return;
+ const r=new FileReader();r.onload=x=>{photoData=x.target.result;avatar.innerHTML='<img src="'+photoData+'">';photoMini.src=photoData;photoMini.style.display='block'};r.readAsDataURL(f)
+});
+
+function applyTheme(name){
+ const t=themes[name];
+ accent.value=t.accent;background.value=t.background;
+ document.documentElement.style.setProperty('--accent',t.accent);
+ document.documentElement.style.setProperty('--bg',t.background);
+ document.documentElement.style.setProperty('--panel',t.panel);
+ document.documentElement.style.setProperty('--text',t.text);
+ document.documentElement.style.setProperty('--muted',t.muted);
+ updatePreview();
+}
+function updatePreview(){
+ document.documentElement.style.setProperty('--accent',v('accent'));
+ document.documentElement.style.setProperty('--bg',v('background'));
+ card.style.background=v('background');
+ namePreview.textContent=v('name');titlePreview.textContent=v('title');specialtyPreview.textContent=v('specialty');
+ websiteLabelPreview.textContent=v('websiteLabel');instagramPreview.textContent=v('instagramHandle');
+ callLink.href='tel:'+v('phone');textLink.href='sms:'+v('phone');emailLink.href='mailto:'+v('email');
+ websiteLink.href=v('website');listingsLink.href=v('listings');bookingLink.href=v('booking');instagramLink.href=v('instagram');linkedinLink.href=v('linkedin');
+ [websiteLink,listingsLink,bookingLink,instagramLink,linkedinLink].forEach(a=>{a.target='_blank';a.rel='noopener'});
+ if(!photoData)avatar.textContent=v('monogram')||'AR';
+ qr.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(location.href);
+}
+function showStep(){
+ document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+ document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+ document.querySelectorAll('.stepdot').forEach((d,i)=>d.classList.toggle('active',i<step));
+ backBtn.disabled=step===1;nextBtn.style.display=step===5?'none':'block';
+ if(step===5)buildSummary();
+}
+function nextStep(){if(step<5){step++;showStep()}}
+function prevStep(){if(step>1){step--;showStep()}}
+function buildSummary(){
+ summary.innerHTML=`<b>${v('name')}</b><br>${v('title')}<br>${v('specialty')}<br><br>
+ <b>Theme:</b> ${document.querySelector('.theme.selected b').textContent}<br>
+ <b>Phone:</b> ${v('phone')}<br><b>Email:</b> ${v('email')}<br><b>Website:</b> ${v('websiteLabel')}`;
+}
+function currentState(){
+ const s={theme:selectedTheme,photoData};ids.forEach(id=>s[id]=v(id));return s
+}
+function saveSetup(){localStorage.setItem('digitalCardWizardV7',JSON.stringify(currentState()));alert('Your setup is saved on this device.')}
+function downloadSetup(){
+ const blob=new Blob([JSON.stringify(currentState(),null,2)],{type:'application/json'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(v('name')||'digital-card').replace(/\s+/g,'-')+'-setup.json';a.click()
+}
+async function copyShareLink(){try{await navigator.clipboard.writeText(location.href);alert('Current link copied.')}catch(e){alert(location.href)}}
+function downloadVCF(){
+ const x=`BEGIN:VCARD
 VERSION:3.0
 FN:${v('name')}
 TITLE:${v('title')}
 TEL;TYPE=CELL:${v('phone')}
 EMAIL:${v('email')}
 URL:${v('website')}
-END:VCARD`;const b=new Blob([x],{type:'text/vcard'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(v('name')||'contact').replace(/\s+/g,'-')+'.vcf';a.click()}
-async function shareCard(){if(navigator.share){try{await navigator.share({title:v('name')+' Digital Card',url:location.href})}catch(e){}}else if(navigator.clipboard){navigator.clipboard.writeText(location.href)}}
-loadCard();
-</script></body></html>
+END:VCARD`;const b=new Blob([x],{type:'text/vcard'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(v('name')||'contact').replace(/\s+/g,'-')+'.vcf';a.click()
+}
+async function shareCard(){if(navigator.share){try{await navigator.share({title:v('name')+' Digital Card',url:location.href})}catch(e){}}else copyShareLink()}
+applyTheme('blackGold');updatePreview();showStep();
+</script>
+</body>
+</html>
