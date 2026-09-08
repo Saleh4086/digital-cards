@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Digital Card Design Studio v8</title>
+<title>Digital Card Studio v9</title>
 <style>
 :root{
   --accent:#B79A63;--bg:#111111;--panel:#171717;--text:#F7F4EE;--muted:#A9A39A;
@@ -11,55 +11,38 @@
 }
 *{box-sizing:border-box}
 body{margin:0;background:#0b0b0b;color:var(--text);font-family:var(--fontBody)}
-.app{min-height:100vh;display:grid;grid-template-columns:minmax(380px,500px) 1fr}
+.app{min-height:100vh;display:grid;grid-template-columns:minmax(390px,510px) 1fr}
 .studio{background:#101010;border-right:1px solid #282828;padding:24px;overflow:auto}
 .brand{font:500 31px Georgia,serif;margin:0 0 6px}.subtitle{color:#aaa;font-size:13px;line-height:1.5;margin-bottom:18px}
 .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}
 .tab{padding:10px 6px;border-radius:10px;background:#191919;color:#bbb;border:1px solid #2d2d2d;font-size:11px}
 .tab.active{background:var(--accent);color:var(--buttonText);border-color:transparent}
-.panel{display:none}.panel.active{display:block}
-.panel h2{font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin:0 0 12px}
-.presetGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.preset{border:1px solid #343434;background:#171717;border-radius:14px;padding:9px;cursor:pointer}
-.preset.selected{outline:2px solid var(--accent);border-color:transparent}
-.swatch{height:66px;border-radius:10px;margin-bottom:8px}
-.preset b{font-size:12px}.preset small{display:block;color:#999;margin-top:3px}
+.panel{display:none}.panel.active{display:block}.panel h2{font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase}
 label{display:block;font-size:11px;color:#bbb;margin:9px 0 5px}
 input,select{width:100%;padding:10px 11px;border-radius:9px;border:1px solid #333;background:#171717;color:#fff}
-input[type=color]{height:44px;padding:5px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.uploadBox{border:1px dashed #444;border-radius:12px;padding:12px;background:#151515}
-.previewArea{padding:28px;display:flex;justify-content:center;align-items:flex-start;background:#0a0a0a}
-.card{width:min(100%,450px);background:var(--bg);padding:24px;border-radius:var(--radius);border:1px solid var(--border);box-shadow:0 28px 80px rgba(0,0,0,.45);position:relative;overflow:hidden}
+input[type=color]{height:44px;padding:5px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.presetGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.preset{border:1px solid #343434;background:#171717;border-radius:14px;padding:9px;cursor:pointer}.preset.selected{outline:2px solid var(--accent);border-color:transparent}.swatch{height:66px;border-radius:10px;margin-bottom:8px}.preset b{font-size:12px}.preset small{display:block;color:#999;margin-top:3px}
+.previewArea{padding:28px;display:flex;justify-content:center;align-items:flex-start}
+.card{width:min(100%,450px);background:var(--bg);padding:24px;border-radius:var(--radius);border:1px solid var(--border);box-shadow:0 28px 80px rgba(0,0,0,.45)}
 .card.gradient1{background:linear-gradient(160deg,var(--bg),var(--panel))}
 .card.gradient2{background:radial-gradient(circle at 80% 0%,var(--panel),transparent 38%),var(--bg)}
-.identity{display:flex;gap:16px;align-items:center;margin:8px 0 22px}
-.avatar{width:84px;height:84px;border:1px solid var(--accent);border-radius:calc(var(--radius) * .8);display:flex;align-items:center;justify-content:center;color:var(--accent);font:30px var(--fontHeading);overflow:hidden;flex:0 0 auto;background:var(--panel)}
-.avatar img{width:100%;height:100%;object-fit:cover}
-.eyebrow{font-size:10px;letter-spacing:2.6px;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
-.name{font:500 31px/1.03 var(--fontHeading);margin:0 0 7px}.role{color:var(--muted);font-size:14px}
-.save{width:100%;background:var(--accent);color:var(--buttonText);border-radius:calc(var(--radius) * .7);padding:15px;margin-bottom:15px;border:0;font-weight:800}
-.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.quick a{text-decoration:none;color:var(--text);text-align:center;border:1px solid var(--border);border-radius:calc(var(--radius) * .7);padding:14px 6px;background:var(--panel);font-size:12px;font-weight:700}
-.links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:var(--text);border-top:1px solid var(--border);padding:17px 2px}
-.links small{display:block;color:var(--muted);margin-top:4px}.arrow{color:var(--accent)}
-.share{width:100%;margin-top:12px;background:transparent;color:var(--accent);border:1px solid var(--border);border-radius:calc(var(--radius) * .7);padding:13px;font-weight:800}
-.qr{border-top:1px solid var(--border);margin-top:18px;padding-top:18px;display:flex;gap:15px;align-items:center}
-.qr img{width:90px;height:90px;background:white;padding:6px;border-radius:10px}.qr p{font-size:12px;color:var(--muted);line-height:1.5}.qr b{color:var(--text)}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
-button.action{padding:13px;border-radius:10px;font-weight:800;border:0}
-.primary{background:var(--accent);color:var(--buttonText)}.secondary{background:#1b1b1b;color:white;border:1px solid #333!important}
-.badge{display:inline-block;border:1px solid #353535;color:#aaa;border-radius:99px;padding:5px 8px;font-size:10px;margin-bottom:9px}
+.identity{display:flex;gap:16px;align-items:center;margin:8px 0 22px}.avatar{width:84px;height:84px;border:1px solid var(--accent);border-radius:calc(var(--radius)*.8);display:flex;align-items:center;justify-content:center;color:var(--accent);font:30px var(--fontHeading);overflow:hidden;background:var(--panel);flex:0 0 auto}.avatar img{width:100%;height:100%;object-fit:cover}
+.eyebrow{font-size:10px;letter-spacing:2.6px;color:var(--accent);text-transform:uppercase;margin-bottom:8px}.name{font:500 31px/1.03 var(--fontHeading);margin:0 0 7px}.role{color:var(--muted);font-size:14px}
+.save{width:100%;background:var(--accent);color:var(--buttonText);border-radius:calc(var(--radius)*.7);padding:15px;margin-bottom:15px;border:0;font-weight:800}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.quick a{text-decoration:none;color:var(--text);text-align:center;border:1px solid var(--border);border-radius:calc(var(--radius)*.7);padding:14px 6px;background:var(--panel);font-size:12px;font-weight:700}
+.links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:var(--text);border-top:1px solid var(--border);padding:17px 2px}.links small{display:block;color:var(--muted);margin-top:4px}.arrow{color:var(--accent)}
+.share{width:100%;margin-top:12px;background:transparent;color:var(--accent);border:1px solid var(--border);border-radius:calc(var(--radius)*.7);padding:13px;font-weight:800}
+.qr{border-top:1px solid var(--border);margin-top:18px;padding-top:18px;display:flex;gap:15px;align-items:center}.qr img{width:90px;height:90px;background:white;padding:6px;border-radius:10px}.qr p{font-size:12px;color:var(--muted);line-height:1.5}.qr b{color:var(--text)}
+.actions{display:grid;gap:10px;margin-top:18px}button.action{padding:13px;border-radius:10px;font-weight:800;border:0}.primary{background:var(--accent);color:var(--buttonText)}.secondary{background:#1b1b1b;color:white;border:1px solid #333!important}.download{background:#f4f4f4;color:#111}
+.note{font-size:11px;color:#888;line-height:1.5;margin-top:10px}
 @media(max-width:880px){.app{grid-template-columns:1fr}.studio{border-right:0;border-bottom:1px solid #282828}.previewArea{padding:16px}}
 </style>
 </head>
 <body>
 <div class="app">
 <aside class="studio">
-<div class="badge">DESIGN STUDIO v8</div>
-<h1 class="brand">Build Your Card</h1>
-<div class="subtitle">Start with a preset or customize every major visual detail to match your brand.</div>
+<h1 class="brand">Digital Card Studio</h1>
+<div class="subtitle">Customize your card, then download a clean finished website package for your own hosting.</div>
 
 <div class="tabs">
 <button class="tab active" data-tab="preset">Presets</button>
@@ -74,7 +57,7 @@ button.action{padding:13px;border-radius:10px;font-weight:800;border:0}
 <div class="preset selected" data-preset="blackGold"><div class="swatch" style="background:linear-gradient(135deg,#111 0 72%,#B79A63 72%)"></div><b>Black + Champagne</b><small>Luxury</small></div>
 <div class="preset" data-preset="navy"><div class="swatch" style="background:linear-gradient(135deg,#111A2B 0 72%,#D8B66A 72%)"></div><b>Navy + Gold</b><small>Executive</small></div>
 <div class="preset" data-preset="emerald"><div class="swatch" style="background:linear-gradient(135deg,#10251F 0 72%,#C0A067 72%)"></div><b>Emerald + Gold</b><small>Boutique</small></div>
-<div class="preset" data-preset="rose"><div class="swatch" style="background:linear-gradient(135deg,#21161A 0 72%,#D29AA2 72%)"></div><b>Rose + Charcoal</b><small>Beauty / Creative</small></div>
+<div class="preset" data-preset="rose"><div class="swatch" style="background:linear-gradient(135deg,#21161A 0 72%,#D29AA2 72%)"></div><b>Rose + Charcoal</b><small>Creative</small></div>
 <div class="preset" data-preset="blueWhite"><div class="swatch" style="background:linear-gradient(135deg,#103A66 0 72%,#F4F7FA 72%)"></div><b>Blue + White</b><small>Professional</small></div>
 <div class="preset" data-preset="creamBrown"><div class="swatch" style="background:linear-gradient(135deg,#F2EBDD 0 72%,#6A4B3A 72%)"></div><b>Cream + Brown</b><small>Warm Luxury</small></div>
 <div class="preset" data-preset="purple"><div class="swatch" style="background:linear-gradient(135deg,#251A36 0 72%,#C3A6E8 72%)"></div><b>Purple + Lavender</b><small>Modern</small></div>
@@ -88,11 +71,11 @@ button.action{padding:13px;border-radius:10px;font-weight:800;border:0}
 <label>Title</label><input id="title" value="Real Estate Advisor">
 <label>Business / Specialty</label><input id="specialty" value="Luxury Real Estate">
 <label>Monogram</label><input id="monogram" value="AR">
-<div class="uploadBox"><label>Photo or Logo</label><input id="photo" type="file" accept="image/*"></div>
+<label>Photo or Logo</label><input id="photo" type="file" accept="image/*">
 </section>
 
 <section class="panel" id="design">
-<h2>Full Design Controls</h2>
+<h2>Design Controls</h2>
 <div class="grid2">
 <div><label>Background</label><input id="background" type="color" value="#111111"></div>
 <div><label>Panel / Button Fill</label><input id="panelColor" type="color" value="#171717"></div>
@@ -103,36 +86,17 @@ button.action{padding:13px;border-radius:10px;font-weight:800;border:0}
 <div><label>Main Button Text</label><input id="buttonText" type="color" value="#111111"></div>
 <div><label>Corner Radius</label><input id="radius" type="range" min="6" max="34" value="20"></div>
 </div>
-
 <label>Background Style</label>
-<select id="backgroundStyle">
-<option value="solid">Solid</option>
-<option value="gradient1">Soft Gradient</option>
-<option value="gradient2">Spotlight Gradient</option>
-</select>
-
-<label>Heading Font Style</label>
-<select id="headingFont">
-<option value="Georgia,serif">Classic Serif</option>
-<option value="Arial,sans-serif">Modern Sans</option>
-<option value="'Trebuchet MS',sans-serif">Clean Contemporary</option>
-<option value="'Courier New',monospace">Editorial Mono</option>
-</select>
-
-<label>Body Font Style</label>
-<select id="bodyFont">
-<option value="Arial,sans-serif">Clean Sans</option>
-<option value="'Trebuchet MS',sans-serif">Contemporary</option>
-<option value="Georgia,serif">Traditional Serif</option>
-</select>
+<select id="backgroundStyle"><option value="solid">Solid</option><option value="gradient1">Soft Gradient</option><option value="gradient2">Spotlight Gradient</option></select>
+<label>Heading Font</label>
+<select id="headingFont"><option value="Georgia,serif">Classic Serif</option><option value="Arial,sans-serif">Modern Sans</option><option value="'Trebuchet MS',sans-serif">Clean Contemporary</option><option value="'Courier New',monospace">Editorial Mono</option></select>
+<label>Body Font</label>
+<select id="bodyFont"><option value="Arial,sans-serif">Clean Sans</option><option value="'Trebuchet MS',sans-serif">Contemporary</option><option value="Georgia,serif">Traditional Serif</option></select>
 </section>
 
 <section class="panel" id="links">
 <h2>Contact & Links</h2>
-<div class="grid2">
-<div><label>Phone</label><input id="phone" value="+15551234567"></div>
-<div><label>Email</label><input id="email" value="hello@yourbrand.com"></div>
-</div>
+<div class="grid2"><div><label>Phone</label><input id="phone" value="+15551234567"></div><div><label>Email</label><input id="email" value="hello@yourbrand.com"></div></div>
 <label>Website URL</label><input id="website" value="https://example.com">
 <label>Website Label</label><input id="websiteLabel" value="yourwebsite.com">
 <label>Listings / Portfolio</label><input id="listings" value="https://example.com/listings">
@@ -145,15 +109,14 @@ button.action{padding:13px;border-radius:10px;font-weight:800;border:0}
 <div class="actions">
 <button class="action secondary" onclick="resetStudio()">RESET</button>
 <button class="action primary" onclick="saveStudio()">SAVE DESIGN</button>
+<button class="action download" onclick="downloadFinishedCard()">DOWNLOAD MY FINISHED CARD</button>
 </div>
+<div class="note">The download contains a clean public card with no editor controls. The buyer uploads that finished file to their own hosting.</div>
 </aside>
 
 <section class="previewArea">
 <main class="card" id="card">
-<div class="identity">
-<div class="avatar" id="avatar">AR</div>
-<div><div class="eyebrow" id="specialtyPreview">Luxury Real Estate</div><h2 class="name" id="namePreview">Alexandra Reed</h2><div class="role" id="titlePreview">Real Estate Advisor</div></div>
-</div>
+<div class="identity"><div class="avatar" id="avatar">AR</div><div><div class="eyebrow" id="specialtyPreview">Luxury Real Estate</div><h2 class="name" id="namePreview">Alexandra Reed</h2><div class="role" id="titlePreview">Real Estate Advisor</div></div></div>
 <button class="save" onclick="downloadVCF()">SAVE CONTACT</button>
 <div class="quick"><a id="callLink">Call</a><a id="textLink">Text</a><a id="emailLink">Email</a></div>
 <div class="links">
@@ -181,75 +144,72 @@ const presets={
  redBlack:{background:'#111111',panel:'#1B1B1B',text:'#F7F4EE',muted:'#AAAAAA',accent:'#B83434',border:'#4E2727',button:'#FFFFFF'}
 };
 let photoData='';
-
 const $=id=>document.getElementById(id),v=id=>$(id).value.trim();
 const controls=['name','title','specialty','monogram','phone','email','website','websiteLabel','listings','booking','instagram','instagramHandle','linkedin','background','panelColor','textColor','mutedColor','accent','borderColor','buttonText','radius','backgroundStyle','headingFont','bodyFont'];
 
-document.querySelectorAll('.tab').forEach(btn=>btn.onclick=()=>{
- document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
- document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
- btn.classList.add('active');$(btn.dataset.tab).classList.add('active');
-});
-
-document.querySelectorAll('.preset').forEach(p=>p.onclick=()=>{
- document.querySelectorAll('.preset').forEach(x=>x.classList.remove('selected'));p.classList.add('selected');
- applyPreset(p.dataset.preset);
-});
-
+document.querySelectorAll('.tab').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));btn.classList.add('active');$(btn.dataset.tab).classList.add('active')});
+document.querySelectorAll('.preset').forEach(p=>p.onclick=()=>{document.querySelectorAll('.preset').forEach(x=>x.classList.remove('selected'));p.classList.add('selected');applyPreset(p.dataset.preset)});
 controls.forEach(id=>$(id).addEventListener('input',update));
-photo.addEventListener('change',e=>{
- const f=e.target.files[0];if(!f)return;const r=new FileReader();
- r.onload=x=>{photoData=x.target.result;avatar.innerHTML='<img src="'+photoData+'">'};r.readAsDataURL(f)
-});
+photo.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{photoData=x.target.result;avatar.innerHTML='<img src="'+photoData+'">'};r.readAsDataURL(f)});
 
-function applyPreset(name){
- const p=presets[name];
- background.value=p.background;panelColor.value=p.panel;textColor.value=p.text;mutedColor.value=p.muted;accent.value=p.accent;borderColor.value=p.border;buttonText.value=p.button;
- update();
-}
+function applyPreset(name){const p=presets[name];background.value=p.background;panelColor.value=p.panel;textColor.value=p.text;mutedColor.value=p.muted;accent.value=p.accent;borderColor.value=p.border;buttonText.value=p.button;update()}
 function update(){
- document.documentElement.style.setProperty('--bg',v('background'));
- document.documentElement.style.setProperty('--panel',v('panelColor'));
- document.documentElement.style.setProperty('--text',v('textColor'));
- document.documentElement.style.setProperty('--muted',v('mutedColor'));
- document.documentElement.style.setProperty('--accent',v('accent'));
- document.documentElement.style.setProperty('--border',v('borderColor'));
- document.documentElement.style.setProperty('--buttonText',v('buttonText'));
- document.documentElement.style.setProperty('--radius',v('radius')+'px');
- document.documentElement.style.setProperty('--fontHeading',headingFont.value);
- document.documentElement.style.setProperty('--fontBody',bodyFont.value);
- card.classList.remove('gradient1','gradient2');
- if(backgroundStyle.value!=='solid')card.classList.add(backgroundStyle.value);
-
- namePreview.textContent=v('name');titlePreview.textContent=v('title');specialtyPreview.textContent=v('specialty');
- websiteLabelPreview.textContent=v('websiteLabel');instagramPreview.textContent=v('instagramHandle');
- callLink.href='tel:'+v('phone');textLink.href='sms:'+v('phone');emailLink.href='mailto:'+v('email');
- websiteLink.href=v('website');listingsLink.href=v('listings');bookingLink.href=v('booking');instagramLink.href=v('instagram');linkedinLink.href=v('linkedin');
- if(!photoData)avatar.textContent=v('monogram')||'AR';
- qr.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(location.href);
+ document.documentElement.style.setProperty('--bg',v('background'));document.documentElement.style.setProperty('--panel',v('panelColor'));document.documentElement.style.setProperty('--text',v('textColor'));document.documentElement.style.setProperty('--muted',v('mutedColor'));document.documentElement.style.setProperty('--accent',v('accent'));document.documentElement.style.setProperty('--border',v('borderColor'));document.documentElement.style.setProperty('--buttonText',v('buttonText'));document.documentElement.style.setProperty('--radius',v('radius')+'px');document.documentElement.style.setProperty('--fontHeading',headingFont.value);document.documentElement.style.setProperty('--fontBody',bodyFont.value);
+ card.classList.remove('gradient1','gradient2');if(backgroundStyle.value!=='solid')card.classList.add(backgroundStyle.value);
+ namePreview.textContent=v('name');titlePreview.textContent=v('title');specialtyPreview.textContent=v('specialty');websiteLabelPreview.textContent=v('websiteLabel');instagramPreview.textContent=v('instagramHandle');
+ callLink.href='tel:'+v('phone');textLink.href='sms:'+v('phone');emailLink.href='mailto:'+v('email');websiteLink.href=v('website');listingsLink.href=v('listings');bookingLink.href=v('booking');instagramLink.href=v('instagram');linkedinLink.href=v('linkedin');if(!photoData)avatar.textContent=v('monogram')||'AR';
+ qr.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(location.href)
 }
-function saveStudio(){
- const s={photoData};controls.forEach(id=>s[id]=$(id).value);localStorage.setItem('digitalCardDesignV8',JSON.stringify(s));alert('Design saved on this device.')
-}
-function loadStudio(){
- const raw=localStorage.getItem('digitalCardDesignV8');if(!raw){update();return}
- try{const s=JSON.parse(raw);controls.forEach(id=>{if(s[id]!=null)$(id).value=s[id]});photoData=s.photoData||'';if(photoData)avatar.innerHTML='<img src="'+photoData+'">'}catch(e){}
- update()
-}
-function resetStudio(){localStorage.removeItem('digitalCardDesignV8');location.reload()}
-function downloadVCF(){
- const x=`BEGIN:VCARD
+function saveStudio(){const s={photoData};controls.forEach(id=>s[id]=$(id).value);localStorage.setItem('digitalCardDesignV9',JSON.stringify(s));alert('Design saved on this device.')}
+function loadStudio(){const raw=localStorage.getItem('digitalCardDesignV9');if(raw){try{const s=JSON.parse(raw);controls.forEach(id=>{if(s[id]!=null)$(id).value=s[id]});photoData=s.photoData||'';if(photoData)avatar.innerHTML='<img src="'+photoData+'">'}catch(e){}}update()}
+function resetStudio(){localStorage.removeItem('digitalCardDesignV9');location.reload()}
+function downloadVCF(){const x=`BEGIN:VCARD
 VERSION:3.0
 FN:${v('name')}
 TITLE:${v('title')}
 TEL;TYPE=CELL:${v('phone')}
 EMAIL:${v('email')}
 URL:${v('website')}
-END:VCARD`;
- const b=new Blob([x],{type:'text/vcard'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(v('name')||'contact').replace(/\s+/g,'-')+'.vcf';a.click()
+END:VCARD`;const b=new Blob([x],{type:'text/vcard'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(v('name')||'contact').replace(/\s+/g,'-')+'.vcf';a.click()}
+async function shareCard(){if(navigator.share){try{await navigator.share({title:v('name')+' Digital Card',url:location.href})}catch(e){}}}
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function standaloneHTML(){
+ const photo = photoData ? `<img src="${photoData}" alt="">` : esc(v('monogram')||'AR');
+ const bgClass = backgroundStyle.value==='solid'?'':backgroundStyle.value;
+ const qr='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent('REPLACE_WITH_YOUR_LIVE_URL');
+ return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(v('name'))} | Digital Card</title>
+<style>
+:root{--accent:${esc(v('accent'))};--bg:${esc(v('background'))};--panel:${esc(v('panelColor'))};--text:${esc(v('textColor'))};--muted:${esc(v('mutedColor'))};--border:${esc(v('borderColor'))};--buttonText:${esc(v('buttonText'))};--radius:${esc(v('radius'))}px;--fontHeading:${headingFont.value};--fontBody:${bodyFont.value}}
+*{box-sizing:border-box}body{margin:0;background:#0b0b0b;color:var(--text);font-family:var(--fontBody);display:flex;justify-content:center}.card{width:min(100%,450px);min-height:100vh;background:var(--bg);padding:24px;border-radius:var(--radius);border:1px solid var(--border)}.gradient1{background:linear-gradient(160deg,var(--bg),var(--panel))}.gradient2{background:radial-gradient(circle at 80% 0%,var(--panel),transparent 38%),var(--bg)}
+.identity{display:flex;gap:16px;align-items:center;margin:8px 0 22px}.avatar{width:84px;height:84px;border:1px solid var(--accent);border-radius:calc(var(--radius)*.8);display:flex;align-items:center;justify-content:center;color:var(--accent);font:30px var(--fontHeading);overflow:hidden;background:var(--panel);flex:0 0 auto}.avatar img{width:100%;height:100%;object-fit:cover}.eyebrow{font-size:10px;letter-spacing:2.6px;color:var(--accent);text-transform:uppercase;margin-bottom:8px}.name{font:500 31px/1.03 var(--fontHeading);margin:0 0 7px}.role{color:var(--muted);font-size:14px}.save{width:100%;background:var(--accent);color:var(--buttonText);border-radius:calc(var(--radius)*.7);padding:15px;margin-bottom:15px;border:0;font-weight:800}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.quick a{text-decoration:none;color:var(--text);text-align:center;border:1px solid var(--border);border-radius:calc(var(--radius)*.7);padding:14px 6px;background:var(--panel);font-size:12px;font-weight:700}.links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:var(--text);border-top:1px solid var(--border);padding:17px 2px}.links small{display:block;color:var(--muted);margin-top:4px}.arrow{color:var(--accent)}.share{width:100%;margin-top:12px;background:transparent;color:var(--accent);border:1px solid var(--border);border-radius:calc(var(--radius)*.7);padding:13px;font-weight:800}.qr{border-top:1px solid var(--border);margin-top:18px;padding-top:18px;display:flex;gap:15px;align-items:center}.qr img{width:90px;height:90px;background:white;padding:6px;border-radius:10px}.qr p{font-size:12px;color:var(--muted);line-height:1.5}.qr b{color:var(--text)}
+</style></head><body><main class="card ${bgClass}">
+<div class="identity"><div class="avatar">${photo}</div><div><div class="eyebrow">${esc(v('specialty'))}</div><h1 class="name">${esc(v('name'))}</h1><div class="role">${esc(v('title'))}</div></div></div>
+<button class="save" onclick="vcf()">SAVE CONTACT</button>
+<div class="quick"><a href="tel:${esc(v('phone'))}">Call</a><a href="sms:${esc(v('phone'))}">Text</a><a href="mailto:${esc(v('email'))}">Email</a></div>
+<div class="links">
+<a href="${esc(v('website'))}" target="_blank"><div><b>Website</b><small>${esc(v('websiteLabel'))}</small></div><span class="arrow">→</span></a>
+<a href="${esc(v('listings'))}" target="_blank"><div><b>My Listings / Portfolio</b><small>View current work</small></div><span class="arrow">→</span></a>
+<a href="${esc(v('booking'))}" target="_blank"><div><b>Book an Appointment</b><small>Schedule a consultation</small></div><span class="arrow">→</span></a>
+<a href="${esc(v('instagram'))}" target="_blank"><div><b>Instagram</b><small>${esc(v('instagramHandle'))}</small></div><span class="arrow">→</span></a>
+<a href="${esc(v('linkedin'))}" target="_blank"><div><b>LinkedIn</b><small>Connect professionally</small></div><span class="arrow">→</span></a>
+</div>
+<button class="share" onclick="shareCard()">SHARE MY CARD</button>
+<div class="qr"><img id="qr"><p><b>Scan to open this card</b><br>After you upload this page online, the QR automatically uses the live page URL.</p></div>
+<script>
+document.getElementById('qr').src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(location.href);
+function vcf(){const x=\`BEGIN:VCARD\\nVERSION:3.0\\nFN:${esc(v('name'))}\\nTITLE:${esc(v('title'))}\\nTEL;TYPE=CELL:${esc(v('phone'))}\\nEMAIL:${esc(v('email'))}\\nURL:${esc(v('website'))}\\nEND:VCARD\`;const b=new Blob([x],{type:'text/vcard'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='${esc(v('name')).replace(/\s+/g,'-')}.vcf';a.click()}
+async function shareCard(){if(navigator.share){try{await navigator.share({title:'${esc(v('name'))} Digital Card',url:location.href})}catch(e){}}}
+<\/script></main></body></html>`
 }
-async function shareCard(){if(navigator.share){try{await navigator.share({title:v('name')+' Digital Card',url:location.href})}catch(e){}}else if(navigator.clipboard){navigator.clipboard.writeText(location.href);alert('Link copied')}}
+
+function downloadFinishedCard(){
+ const html=standaloneHTML();
+ const blob=new Blob([html],{type:'text/html'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+ a.download='index.html';a.click();URL.revokeObjectURL(a.href);
+ alert('Finished card created. Upload the downloaded index.html to your own hosting.')
+}
 loadStudio();
 </script>
-</body>
-</html>
+</body></html>
