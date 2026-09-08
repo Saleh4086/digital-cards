@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Alexandra Reed | Digital Business Card</title>
+<meta name="theme-color" content="#111111">
+<style>
+:root{
+  --bg:#101010;
+  --panel:#171717;
+  --gold:#b79a63;
+  --text:#f7f4ee;
+  --muted:#bcb7ae;
+  --line:rgba(183,154,99,.35);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(183,154,99,.10), transparent 35%),
+    linear-gradient(180deg,#0c0c0c 0%, #141414 100%);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  display:flex;
+  justify-content:center;
+}
+.wrap{
+  width:min(100%,480px);
+  padding:26px 18px 38px;
+}
+.card{
+  background:rgba(23,23,23,.97);
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:28px 22px 24px;
+  box-shadow:0 24px 70px rgba(0,0,0,.45);
+  overflow:hidden;
+  position:relative;
+}
+.card:before{
+  content:"";
+  position:absolute;
+  top:-70px; right:-70px;
+  width:160px; height:160px;
+  border:1px solid var(--line);
+  border-radius:50%;
+}
+.monogram{
+  width:72px;height:72px;border-radius:18px;
+  border:1px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:Georgia,serif;font-size:30px;letter-spacing:2px;
+  color:var(--gold);margin-bottom:22px;
+}
+.eyebrow{
+  color:var(--gold);font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;margin-bottom:10px;
+}
+h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:36px;line-height:1.02;margin:0 0 9px;
+  font-weight:500;letter-spacing:.2px;
+}
+.role{color:var(--muted);font-size:14px;margin-bottom:24px}
+.save{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;padding:15px 16px;border-radius:14px;
+  background:var(--gold);color:#111;text-decoration:none;
+  font-weight:700;font-size:14px;letter-spacing:.4px;
+  border:none;cursor:pointer;margin-bottom:18px;
+}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.btn{
+  text-decoration:none;color:var(--text);border:1px solid #2b2b2b;
+  background:#131313;border-radius:14px;padding:13px 7px;
+  text-align:center;font-size:12px;font-weight:600;
+}
+.btn span{display:block;color:var(--gold);font-size:18px;margin-bottom:5px}
+.links{display:grid;gap:10px}
+.link{
+  display:flex;align-items:center;justify-content:space-between;
+  text-decoration:none;color:var(--text);border-top:1px solid #2b2b2b;
+  padding:15px 2px;font-size:14px;
+}
+.link small{color:var(--muted)}
+.arrow{color:var(--gold);font-size:18px}
+.footer{
+  text-align:center;color:#7f7b74;font-size:11px;
+  margin-top:18px;line-height:1.5
+}
+.share{
+  margin-top:16px;width:100%;padding:13px;border-radius:13px;
+  color:var(--gold);background:transparent;border:1px solid var(--line);
+  font-weight:700;cursor:pointer;
+}
+.qrbox{
+  margin-top:18px;border-top:1px solid #2b2b2b;padding-top:18px;
+  display:flex;align-items:center;gap:16px;
+}
+.qr{
+  width:92px;height:92px;background:white;padding:7px;border-radius:10px;
+}
+.qr img{width:100%;height:100%;display:block}
+.qrtext{font-size:13px;color:var(--muted);line-height:1.5}
+.qrtext strong{display:block;color:var(--text);margin-bottom:4px}
+@media (max-width:360px){
+  h1{font-size:31px}
+  .grid{gap:7px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <main class="card">
+    <div class="monogram">AR</div>
+    <div class="eyebrow">Luxury Real Estate</div>
+    <h1>Alexandra Reed</h1>
+    <div class="role">Real Estate Advisor</div>
+
+    <button class="save" onclick="downloadVCF()">SAVE CONTACT</button>
+
+    <div class="grid">
+      <a class="btn" href="tel:+15551234567"><span>☎</span>Call</a>
+      <a class="btn" href="sms:+15551234567"><span>✉</span>Text</a>
+      <a class="btn" href="mailto:hello@yourbrand.com"><span>✦</span>Email</a>
+    </div>
+
+    <div class="links">
+      <a class="link" href="https://example.com" target="_blank" rel="noopener">
+        <div><strong>Website</strong><br><small>yourwebsite.com</small></div><div class="arrow">→</div>
+      </a>
+      <a class="link" href="https://example.com/listings" target="_blank" rel="noopener">
+        <div><strong>My Listings</strong><br><small>View current properties</small></div><div class="arrow">→</div>
+      </a>
+      <a class="link" href="https://example.com/book" target="_blank" rel="noopener">
+        <div><strong>Book an Appointment</strong><br><small>Schedule a consultation</small></div><div class="arrow">→</div>
+      </a>
+      <a class="link" href="https://instagram.com/" target="_blank" rel="noopener">
+        <div><strong>Instagram</strong><br><small>@yourhandle</small></div><div class="arrow">→</div>
+      </a>
+      <a class="link" href="https://linkedin.com/" target="_blank" rel="noopener">
+        <div><strong>LinkedIn</strong><br><small>Connect professionally</small></div><div class="arrow">→</div>
+      </a>
+    </div>
+
+    <button class="share" onclick="shareCard()">SHARE MY CARD</button>
+
+    <div class="qrbox">
+      <div class="qr">
+        <img alt="QR code placeholder" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fexample.com">
+      </div>
+      <div class="qrtext">
+        <strong>Scan to open this card</strong>
+        Put this QR code on flyers, signs, email signatures, or printed cards.
+      </div>
+    </div>
+  </main>
+  <div class="footer">
+    Demo template • Replace every placeholder with the buyer's own details.
+  </div>
+</div>
+
+<script>
+function downloadVCF(){
+  const vcard = `BEGIN:VCARD
+VERSION:3.0
+N:Reed;Alexandra;;;
+FN:Alexandra Reed
+ORG:Your Brand
+TITLE:Real Estate Advisor
+TEL;TYPE=CELL:+15551234567
+EMAIL:hello@yourbrand.com
+URL:https://example.com
+END:VCARD`;
+  const blob = new Blob([vcard], {type:'text/vcard'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Alexandra-Reed.vcf';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+async function shareCard(){
+  const data = {
+    title:'Alexandra Reed Digital Business Card',
+    text:'Save my digital business card',
+    url:window.location.href
+  };
+  if(navigator.share){
+    try{ await navigator.share(data); }catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(window.location.href);
+      alert('Card link copied.');
+    } catch(e){
+      alert('Copy this link: ' + window.location.href);
+    }
+  }
+}
+</script>
+</body>
+</html>
