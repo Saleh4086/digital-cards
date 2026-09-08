@@ -3,250 +3,240 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Luxury Digital Card Setup Wizard</title>
+<title>Digital Card Design Studio v8</title>
 <style>
 :root{
   --accent:#B79A63;--bg:#111111;--panel:#171717;--text:#F7F4EE;--muted:#A9A39A;
-  --line:rgba(183,154,99,.35);--soft:#202020
+  --border:#3A3328;--buttonText:#111111;--radius:20px;--fontHeading:Georgia,serif;--fontBody:Arial,sans-serif
 }
 *{box-sizing:border-box}
-body{margin:0;background:#0b0b0b;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
-.app{min-height:100vh;display:grid;grid-template-columns:minmax(360px,470px) 1fr}
-.wizard{background:#101010;border-right:1px solid #282828;padding:24px;overflow:auto}
-.brand{font:500 31px Georgia,serif;margin:0 0 6px}.subtitle{color:#aaa;font-size:13px;line-height:1.5;margin-bottom:20px}
-.progress{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:20px}
-.stepdot{height:5px;border-radius:99px;background:#272727}.stepdot.active{background:var(--accent)}
-.step{display:none}.step.active{display:block}
-.step h2{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin:0 0 14px}
-.themegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.theme{
-  border:1px solid #343434;background:#171717;border-radius:14px;padding:10px;cursor:pointer;
-  transition:.15s;min-height:120px
-}
-.theme.selected{outline:2px solid var(--accent);border-color:transparent}
-.swatch{height:70px;border-radius:10px;margin-bottom:8px;position:relative;overflow:hidden}
-.swatch:after{content:"";position:absolute;right:-20px;top:-26px;width:78px;height:78px;border:1px solid rgba(255,255,255,.25);border-radius:50%}
-.theme b{font-size:13px}.theme small{display:block;color:#999;margin-top:3px}
+body{margin:0;background:#0b0b0b;color:var(--text);font-family:var(--fontBody)}
+.app{min-height:100vh;display:grid;grid-template-columns:minmax(380px,500px) 1fr}
+.studio{background:#101010;border-right:1px solid #282828;padding:24px;overflow:auto}
+.brand{font:500 31px Georgia,serif;margin:0 0 6px}.subtitle{color:#aaa;font-size:13px;line-height:1.5;margin-bottom:18px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}
+.tab{padding:10px 6px;border-radius:10px;background:#191919;color:#bbb;border:1px solid #2d2d2d;font-size:11px}
+.tab.active{background:var(--accent);color:var(--buttonText);border-color:transparent}
+.panel{display:none}.panel.active{display:block}
+.panel h2{font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin:0 0 12px}
+.presetGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.preset{border:1px solid #343434;background:#171717;border-radius:14px;padding:9px;cursor:pointer}
+.preset.selected{outline:2px solid var(--accent);border-color:transparent}
+.swatch{height:66px;border-radius:10px;margin-bottom:8px}
+.preset b{font-size:12px}.preset small{display:block;color:#999;margin-top:3px}
 label{display:block;font-size:11px;color:#bbb;margin:9px 0 5px}
-input,select{width:100%;padding:11px 12px;border-radius:9px;border:1px solid #333;background:#171717;color:#fff}
+input,select{width:100%;padding:10px 11px;border-radius:9px;border:1px solid #333;background:#171717;color:#fff}
 input[type=color]{height:44px;padding:5px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.uploadBox{border:1px dashed #444;border-radius:12px;padding:13px;background:#151515}
-.photoMini{width:74px;height:74px;border-radius:16px;object-fit:cover;border:1px solid var(--accent);display:none;margin-top:10px}
-.nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-button{padding:13px;border-radius:11px;font-weight:800;border:0;cursor:pointer}
-.back{background:#1b1b1b;color:white;border:1px solid #333}
-.next{background:var(--accent);color:#111}
-.previewArea{padding:28px;display:flex;justify-content:center;align-items:flex-start;background:radial-gradient(circle at 50% 0%,rgba(183,154,99,.08),transparent 40%),#0a0a0a}
-.card{width:min(100%,450px);background:var(--bg);padding:24px;border-radius:28px;border:1px solid var(--line);box-shadow:0 28px 80px rgba(0,0,0,.45);position:relative;overflow:hidden}
-.card:before{content:"";position:absolute;width:170px;height:170px;border:1px solid var(--line);border-radius:50%;right:-75px;top:-78px}
-.identity{display:flex;gap:16px;align-items:center;margin:8px 0 22px;position:relative}
-.avatar{width:84px;height:84px;border:1px solid var(--accent);border-radius:20px;display:flex;align-items:center;justify-content:center;color:var(--accent);font:30px Georgia,serif;overflow:hidden;flex:0 0 auto;background:var(--panel)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.uploadBox{border:1px dashed #444;border-radius:12px;padding:12px;background:#151515}
+.previewArea{padding:28px;display:flex;justify-content:center;align-items:flex-start;background:#0a0a0a}
+.card{width:min(100%,450px);background:var(--bg);padding:24px;border-radius:var(--radius);border:1px solid var(--border);box-shadow:0 28px 80px rgba(0,0,0,.45);position:relative;overflow:hidden}
+.card.gradient1{background:linear-gradient(160deg,var(--bg),var(--panel))}
+.card.gradient2{background:radial-gradient(circle at 80% 0%,var(--panel),transparent 38%),var(--bg)}
+.identity{display:flex;gap:16px;align-items:center;margin:8px 0 22px}
+.avatar{width:84px;height:84px;border:1px solid var(--accent);border-radius:calc(var(--radius) * .8);display:flex;align-items:center;justify-content:center;color:var(--accent);font:30px var(--fontHeading);overflow:hidden;flex:0 0 auto;background:var(--panel)}
 .avatar img{width:100%;height:100%;object-fit:cover}
-.eyebrow{font-size:10px;letter-spacing:2.7px;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
-.name{font:500 31px/1.03 Georgia,serif;margin:0 0 7px}.role{color:var(--muted);font-size:14px}
-.save{width:100%;background:var(--accent);color:#111;border-radius:14px;padding:15px;margin-bottom:15px}
+.eyebrow{font-size:10px;letter-spacing:2.6px;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+.name{font:500 31px/1.03 var(--fontHeading);margin:0 0 7px}.role{color:var(--muted);font-size:14px}
+.save{width:100%;background:var(--accent);color:var(--buttonText);border-radius:calc(var(--radius) * .7);padding:15px;margin-bottom:15px;border:0;font-weight:800}
 .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.quick a{text-decoration:none;color:var(--text);text-align:center;border:1px solid #303030;border-radius:14px;padding:14px 6px;background:rgba(18,18,18,.72);font-size:12px;font-weight:700}
-.links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:var(--text);border-top:1px solid #2b2b2b;padding:17px 2px}
+.quick a{text-decoration:none;color:var(--text);text-align:center;border:1px solid var(--border);border-radius:calc(var(--radius) * .7);padding:14px 6px;background:var(--panel);font-size:12px;font-weight:700}
+.links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:var(--text);border-top:1px solid var(--border);padding:17px 2px}
 .links small{display:block;color:var(--muted);margin-top:4px}.arrow{color:var(--accent)}
-.share{width:100%;margin-top:12px;background:transparent;color:var(--accent);border:1px solid var(--line)}
-.qr{border-top:1px solid #2b2b2b;margin-top:18px;padding-top:18px;display:flex;gap:15px;align-items:center}
+.share{width:100%;margin-top:12px;background:transparent;color:var(--accent);border:1px solid var(--border);border-radius:calc(var(--radius) * .7);padding:13px;font-weight:800}
+.qr{border-top:1px solid var(--border);margin-top:18px;padding-top:18px;display:flex;gap:15px;align-items:center}
 .qr img{width:90px;height:90px;background:white;padding:6px;border-radius:10px}.qr p{font-size:12px;color:var(--muted);line-height:1.5}.qr b{color:var(--text)}
-.summary{background:#151515;border:1px solid #2c2c2c;border-radius:12px;padding:14px;color:#ccc;font-size:13px;line-height:1.6}
-.finishActions{display:grid;gap:10px;margin-top:14px}
-.finishActions button{width:100%}.ghost{background:#1b1b1b;color:white;border:1px solid #333}
-.notice{font-size:11px;color:#888;line-height:1.5;margin-top:10px}
-.badge{display:inline-block;border:1px solid var(--line);color:var(--accent);border-radius:99px;padding:5px 8px;font-size:10px;margin-bottom:10px}
-@media(max-width:860px){
-  .app{grid-template-columns:1fr}
-  .wizard{border-right:0;border-bottom:1px solid #282828}
-  .previewArea{padding:16px}
-}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+button.action{padding:13px;border-radius:10px;font-weight:800;border:0}
+.primary{background:var(--accent);color:var(--buttonText)}.secondary{background:#1b1b1b;color:white;border:1px solid #333!important}
+.badge{display:inline-block;border:1px solid #353535;color:#aaa;border-radius:99px;padding:5px 8px;font-size:10px;margin-bottom:9px}
+@media(max-width:880px){.app{grid-template-columns:1fr}.studio{border-right:0;border-bottom:1px solid #282828}.previewArea{padding:16px}}
 </style>
 </head>
 <body>
 <div class="app">
-  <aside class="wizard">
-    <div class="badge">CUSTOMER SETUP WIZARD v7</div>
-    <h1 class="brand">Create Your Digital Card</h1>
-    <div class="subtitle">Choose a style, enter your details, preview the card, then save your finished setup.</div>
-    <div class="progress">
-      <div class="stepdot active"></div><div class="stepdot"></div><div class="stepdot"></div><div class="stepdot"></div><div class="stepdot"></div>
-    </div>
+<aside class="studio">
+<div class="badge">DESIGN STUDIO v8</div>
+<h1 class="brand">Build Your Card</h1>
+<div class="subtitle">Start with a preset or customize every major visual detail to match your brand.</div>
 
-    <section class="step active" data-step="1">
-      <h2>1. Choose Your Design</h2>
-      <div class="themegrid">
-        <div class="theme selected" data-theme="blackGold">
-          <div class="swatch" style="background:linear-gradient(135deg,#111 0 72%,#B79A63 72%)"></div>
-          <b>Black + Champagne</b><small>Luxury / Real Estate / Finance</small>
-        </div>
-        <div class="theme" data-theme="navyGold">
-          <div class="swatch" style="background:linear-gradient(135deg,#111A2B 0 72%,#B79A63 72%)"></div>
-          <b>Deep Navy + Gold</b><small>Executive / Legal / Consulting</small>
-        </div>
-        <div class="theme" data-theme="emeraldGold">
-          <div class="swatch" style="background:linear-gradient(135deg,#10251F 0 72%,#B79A63 72%)"></div>
-          <b>Emerald + Gold</b><small>Wellness / Design / Boutique</small>
-        </div>
-        <div class="theme" data-theme="lightLuxury">
-          <div class="swatch" style="background:linear-gradient(135deg,#F2EFE8 0 72%,#252525 72%)"></div>
-          <b>Light Luxury</b><small>Modern / Beauty / Creative</small>
-        </div>
-      </div>
-    </section>
+<div class="tabs">
+<button class="tab active" data-tab="preset">Presets</button>
+<button class="tab" data-tab="info">Info</button>
+<button class="tab" data-tab="design">Design</button>
+<button class="tab" data-tab="links">Links</button>
+</div>
 
-    <section class="step" data-step="2">
-      <h2>2. Your Information</h2>
-      <label>Name</label><input id="name" value="Alexandra Reed">
-      <label>Title</label><input id="title" value="Real Estate Advisor">
-      <label>Business / Specialty</label><input id="specialty" value="Luxury Real Estate">
-      <label>Monogram</label><input id="monogram" value="AR" maxlength="4">
-      <div class="uploadBox">
-        <label>Photo or Logo</label><input id="photo" type="file" accept="image/*">
-        <img id="photoMini" class="photoMini">
-      </div>
-    </section>
+<section class="panel active" id="preset">
+<h2>Starting Styles</h2>
+<div class="presetGrid">
+<div class="preset selected" data-preset="blackGold"><div class="swatch" style="background:linear-gradient(135deg,#111 0 72%,#B79A63 72%)"></div><b>Black + Champagne</b><small>Luxury</small></div>
+<div class="preset" data-preset="navy"><div class="swatch" style="background:linear-gradient(135deg,#111A2B 0 72%,#D8B66A 72%)"></div><b>Navy + Gold</b><small>Executive</small></div>
+<div class="preset" data-preset="emerald"><div class="swatch" style="background:linear-gradient(135deg,#10251F 0 72%,#C0A067 72%)"></div><b>Emerald + Gold</b><small>Boutique</small></div>
+<div class="preset" data-preset="rose"><div class="swatch" style="background:linear-gradient(135deg,#21161A 0 72%,#D29AA2 72%)"></div><b>Rose + Charcoal</b><small>Beauty / Creative</small></div>
+<div class="preset" data-preset="blueWhite"><div class="swatch" style="background:linear-gradient(135deg,#103A66 0 72%,#F4F7FA 72%)"></div><b>Blue + White</b><small>Professional</small></div>
+<div class="preset" data-preset="creamBrown"><div class="swatch" style="background:linear-gradient(135deg,#F2EBDD 0 72%,#6A4B3A 72%)"></div><b>Cream + Brown</b><small>Warm Luxury</small></div>
+<div class="preset" data-preset="purple"><div class="swatch" style="background:linear-gradient(135deg,#251A36 0 72%,#C3A6E8 72%)"></div><b>Purple + Lavender</b><small>Modern</small></div>
+<div class="preset" data-preset="redBlack"><div class="swatch" style="background:linear-gradient(135deg,#111 0 72%,#B83434 72%)"></div><b>Black + Red</b><small>Bold</small></div>
+</div>
+</section>
 
-    <section class="step" data-step="3">
-      <h2>3. Contact & Links</h2>
-      <div class="grid2">
-        <div><label>Phone</label><input id="phone" value="+15551234567"></div>
-        <div><label>Email</label><input id="email" value="hello@yourbrand.com"></div>
-      </div>
-      <label>Website URL</label><input id="website" value="https://example.com">
-      <label>Website Label</label><input id="websiteLabel" value="yourwebsite.com">
-      <label>Listings / Portfolio</label><input id="listings" value="https://example.com/listings">
-      <label>Booking Link</label><input id="booking" value="https://example.com/book">
-      <label>Instagram URL</label><input id="instagram" value="https://instagram.com/">
-      <label>Instagram Handle</label><input id="instagramHandle" value="@yourhandle">
-      <label>LinkedIn URL</label><input id="linkedin" value="https://linkedin.com/">
-    </section>
+<section class="panel" id="info">
+<h2>Identity</h2>
+<label>Name</label><input id="name" value="Alexandra Reed">
+<label>Title</label><input id="title" value="Real Estate Advisor">
+<label>Business / Specialty</label><input id="specialty" value="Luxury Real Estate">
+<label>Monogram</label><input id="monogram" value="AR">
+<div class="uploadBox"><label>Photo or Logo</label><input id="photo" type="file" accept="image/*"></div>
+</section>
 
-    <section class="step" data-step="4">
-      <h2>4. Fine-Tune Your Style</h2>
-      <div class="grid2">
-        <div><label>Accent Color</label><input id="accent" type="color" value="#B79A63"></div>
-        <div><label>Background</label><input id="background" type="color" value="#111111"></div>
-      </div>
-      <label>Card Label</label><input id="cardLabel" value="Luxury Digital Card">
-      <div class="notice">You can keep the preset theme or personalize the colors further.</div>
-    </section>
+<section class="panel" id="design">
+<h2>Full Design Controls</h2>
+<div class="grid2">
+<div><label>Background</label><input id="background" type="color" value="#111111"></div>
+<div><label>Panel / Button Fill</label><input id="panelColor" type="color" value="#171717"></div>
+<div><label>Main Text</label><input id="textColor" type="color" value="#F7F4EE"></div>
+<div><label>Secondary Text</label><input id="mutedColor" type="color" value="#A9A39A"></div>
+<div><label>Accent / Main Button</label><input id="accent" type="color" value="#B79A63"></div>
+<div><label>Border / Divider</label><input id="borderColor" type="color" value="#3A3328"></div>
+<div><label>Main Button Text</label><input id="buttonText" type="color" value="#111111"></div>
+<div><label>Corner Radius</label><input id="radius" type="range" min="6" max="34" value="20"></div>
+</div>
 
-    <section class="step" data-step="5">
-      <h2>5. Finish</h2>
-      <div class="summary" id="summary"></div>
-      <div class="finishActions">
-        <button class="next" onclick="saveSetup()">SAVE MY SETUP</button>
-        <button class="ghost" onclick="downloadSetup()">DOWNLOAD SETUP FILE</button>
-        <button class="ghost" onclick="copyShareLink()">COPY CURRENT CARD LINK</button>
-      </div>
-      <div class="notice">For Etsy, the final commercial version can connect this wizard to a hosted publish service so customers get their own live link automatically.</div>
-    </section>
+<label>Background Style</label>
+<select id="backgroundStyle">
+<option value="solid">Solid</option>
+<option value="gradient1">Soft Gradient</option>
+<option value="gradient2">Spotlight Gradient</option>
+</select>
 
-    <div class="nav">
-      <button class="back" id="backBtn" onclick="prevStep()" disabled>BACK</button>
-      <button class="next" id="nextBtn" onclick="nextStep()">NEXT</button>
-    </div>
-  </aside>
+<label>Heading Font Style</label>
+<select id="headingFont">
+<option value="Georgia,serif">Classic Serif</option>
+<option value="Arial,sans-serif">Modern Sans</option>
+<option value="'Trebuchet MS',sans-serif">Clean Contemporary</option>
+<option value="'Courier New',monospace">Editorial Mono</option>
+</select>
 
-  <section class="previewArea">
-    <main class="card" id="card">
-      <div class="identity">
-        <div class="avatar" id="avatar">AR</div>
-        <div>
-          <div class="eyebrow" id="specialtyPreview">Luxury Real Estate</div>
-          <h2 class="name" id="namePreview">Alexandra Reed</h2>
-          <div class="role" id="titlePreview">Real Estate Advisor</div>
-        </div>
-      </div>
-      <button class="save" onclick="downloadVCF()">SAVE CONTACT</button>
-      <div class="quick">
-        <a id="callLink">Call</a><a id="textLink">Text</a><a id="emailLink">Email</a>
-      </div>
-      <div class="links">
-        <a id="websiteLink"><div><b>Website</b><small id="websiteLabelPreview">yourwebsite.com</small></div><span class="arrow">→</span></a>
-        <a id="listingsLink"><div><b>My Listings / Portfolio</b><small>View current work</small></div><span class="arrow">→</span></a>
-        <a id="bookingLink"><div><b>Book an Appointment</b><small>Schedule a consultation</small></div><span class="arrow">→</span></a>
-        <a id="instagramLink"><div><b>Instagram</b><small id="instagramPreview">@yourhandle</small></div><span class="arrow">→</span></a>
-        <a id="linkedinLink"><div><b>LinkedIn</b><small>Connect professionally</small></div><span class="arrow">→</span></a>
-      </div>
-      <button class="share" onclick="shareCard()">SHARE MY CARD</button>
-      <div class="qr">
-        <img id="qr">
-        <p><b>Scan to open this card</b><br>QR points to the current page URL during setup.</p>
-      </div>
-    </main>
-  </section>
+<label>Body Font Style</label>
+<select id="bodyFont">
+<option value="Arial,sans-serif">Clean Sans</option>
+<option value="'Trebuchet MS',sans-serif">Contemporary</option>
+<option value="Georgia,serif">Traditional Serif</option>
+</select>
+</section>
+
+<section class="panel" id="links">
+<h2>Contact & Links</h2>
+<div class="grid2">
+<div><label>Phone</label><input id="phone" value="+15551234567"></div>
+<div><label>Email</label><input id="email" value="hello@yourbrand.com"></div>
+</div>
+<label>Website URL</label><input id="website" value="https://example.com">
+<label>Website Label</label><input id="websiteLabel" value="yourwebsite.com">
+<label>Listings / Portfolio</label><input id="listings" value="https://example.com/listings">
+<label>Booking Link</label><input id="booking" value="https://example.com/book">
+<label>Instagram URL</label><input id="instagram" value="https://instagram.com/">
+<label>Instagram Handle</label><input id="instagramHandle" value="@yourhandle">
+<label>LinkedIn URL</label><input id="linkedin" value="https://linkedin.com/">
+</section>
+
+<div class="actions">
+<button class="action secondary" onclick="resetStudio()">RESET</button>
+<button class="action primary" onclick="saveStudio()">SAVE DESIGN</button>
+</div>
+</aside>
+
+<section class="previewArea">
+<main class="card" id="card">
+<div class="identity">
+<div class="avatar" id="avatar">AR</div>
+<div><div class="eyebrow" id="specialtyPreview">Luxury Real Estate</div><h2 class="name" id="namePreview">Alexandra Reed</h2><div class="role" id="titlePreview">Real Estate Advisor</div></div>
+</div>
+<button class="save" onclick="downloadVCF()">SAVE CONTACT</button>
+<div class="quick"><a id="callLink">Call</a><a id="textLink">Text</a><a id="emailLink">Email</a></div>
+<div class="links">
+<a id="websiteLink"><div><b>Website</b><small id="websiteLabelPreview">yourwebsite.com</small></div><span class="arrow">→</span></a>
+<a id="listingsLink"><div><b>My Listings / Portfolio</b><small>View current work</small></div><span class="arrow">→</span></a>
+<a id="bookingLink"><div><b>Book an Appointment</b><small>Schedule a consultation</small></div><span class="arrow">→</span></a>
+<a id="instagramLink"><div><b>Instagram</b><small id="instagramPreview">@yourhandle</small></div><span class="arrow">→</span></a>
+<a id="linkedinLink"><div><b>LinkedIn</b><small>Connect professionally</small></div><span class="arrow">→</span></a>
+</div>
+<button class="share" onclick="shareCard()">SHARE MY CARD</button>
+<div class="qr"><img id="qr"><p><b>Scan to open this card</b><br>QR points to the current card URL.</p></div>
+</main>
+</section>
 </div>
 
 <script>
-let step=1, photoData='', selectedTheme='blackGold';
-const themes={
- blackGold:{accent:'#B79A63',background:'#111111',panel:'#171717',text:'#F7F4EE',muted:'#A9A39A'},
- navyGold:{accent:'#B79A63',background:'#111A2B',panel:'#162033',text:'#F6F3EE',muted:'#B1B4BD'},
- emeraldGold:{accent:'#B79A63',background:'#10251F',panel:'#16332A',text:'#F7F4EE',muted:'#B7BDB8'},
- lightLuxury:{accent:'#9C7C4E',background:'#F2EFE8',panel:'#E8E2D8',text:'#222222',muted:'#68645F'}
+const presets={
+ blackGold:{background:'#111111',panel:'#171717',text:'#F7F4EE',muted:'#A9A39A',accent:'#B79A63',border:'#3A3328',button:'#111111'},
+ navy:{background:'#111A2B',panel:'#162033',text:'#F6F3EE',muted:'#B5BAC4',accent:'#D8B66A',border:'#31405A',button:'#111111'},
+ emerald:{background:'#10251F',panel:'#17352B',text:'#F7F4EE',muted:'#B7C0BA',accent:'#C0A067',border:'#2D5145',button:'#111111'},
+ rose:{background:'#21161A',panel:'#34242A',text:'#FFF5F6',muted:'#C8B4B7',accent:'#D29AA2',border:'#583E46',button:'#231216'},
+ blueWhite:{background:'#103A66',panel:'#174B7F',text:'#F7FBFF',muted:'#C6D7E8',accent:'#F4F7FA',border:'#386892',button:'#103A66'},
+ creamBrown:{background:'#F2EBDD',panel:'#E4D7C4',text:'#3A2B23',muted:'#77685F',accent:'#6A4B3A',border:'#B9A58F',button:'#F7F1E6'},
+ purple:{background:'#251A36',panel:'#35264C',text:'#FAF7FF',muted:'#C9BDDA',accent:'#C3A6E8',border:'#54416E',button:'#251A36'},
+ redBlack:{background:'#111111',panel:'#1B1B1B',text:'#F7F4EE',muted:'#AAAAAA',accent:'#B83434',border:'#4E2727',button:'#FFFFFF'}
 };
-const ids=['name','title','specialty','monogram','phone','email','website','websiteLabel','listings','booking','instagram','instagramHandle','linkedin','accent','background','cardLabel'];
-const $=id=>document.getElementById(id), v=id=>$(id).value.trim();
+let photoData='';
 
-document.querySelectorAll('.theme').forEach(el=>el.onclick=()=>{
- document.querySelectorAll('.theme').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');
- selectedTheme=el.dataset.theme;applyTheme(selectedTheme);
+const $=id=>document.getElementById(id),v=id=>$(id).value.trim();
+const controls=['name','title','specialty','monogram','phone','email','website','websiteLabel','listings','booking','instagram','instagramHandle','linkedin','background','panelColor','textColor','mutedColor','accent','borderColor','buttonText','radius','backgroundStyle','headingFont','bodyFont'];
+
+document.querySelectorAll('.tab').forEach(btn=>btn.onclick=()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+ document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+ btn.classList.add('active');$(btn.dataset.tab).classList.add('active');
 });
-ids.forEach(id=>$(id).addEventListener('input',updatePreview));
+
+document.querySelectorAll('.preset').forEach(p=>p.onclick=()=>{
+ document.querySelectorAll('.preset').forEach(x=>x.classList.remove('selected'));p.classList.add('selected');
+ applyPreset(p.dataset.preset);
+});
+
+controls.forEach(id=>$(id).addEventListener('input',update));
 photo.addEventListener('change',e=>{
- const f=e.target.files[0]; if(!f)return;
- const r=new FileReader();r.onload=x=>{photoData=x.target.result;avatar.innerHTML='<img src="'+photoData+'">';photoMini.src=photoData;photoMini.style.display='block'};r.readAsDataURL(f)
+ const f=e.target.files[0];if(!f)return;const r=new FileReader();
+ r.onload=x=>{photoData=x.target.result;avatar.innerHTML='<img src="'+photoData+'">'};r.readAsDataURL(f)
 });
 
-function applyTheme(name){
- const t=themes[name];
- accent.value=t.accent;background.value=t.background;
- document.documentElement.style.setProperty('--accent',t.accent);
- document.documentElement.style.setProperty('--bg',t.background);
- document.documentElement.style.setProperty('--panel',t.panel);
- document.documentElement.style.setProperty('--text',t.text);
- document.documentElement.style.setProperty('--muted',t.muted);
- updatePreview();
+function applyPreset(name){
+ const p=presets[name];
+ background.value=p.background;panelColor.value=p.panel;textColor.value=p.text;mutedColor.value=p.muted;accent.value=p.accent;borderColor.value=p.border;buttonText.value=p.button;
+ update();
 }
-function updatePreview(){
- document.documentElement.style.setProperty('--accent',v('accent'));
+function update(){
  document.documentElement.style.setProperty('--bg',v('background'));
- card.style.background=v('background');
+ document.documentElement.style.setProperty('--panel',v('panelColor'));
+ document.documentElement.style.setProperty('--text',v('textColor'));
+ document.documentElement.style.setProperty('--muted',v('mutedColor'));
+ document.documentElement.style.setProperty('--accent',v('accent'));
+ document.documentElement.style.setProperty('--border',v('borderColor'));
+ document.documentElement.style.setProperty('--buttonText',v('buttonText'));
+ document.documentElement.style.setProperty('--radius',v('radius')+'px');
+ document.documentElement.style.setProperty('--fontHeading',headingFont.value);
+ document.documentElement.style.setProperty('--fontBody',bodyFont.value);
+ card.classList.remove('gradient1','gradient2');
+ if(backgroundStyle.value!=='solid')card.classList.add(backgroundStyle.value);
+
  namePreview.textContent=v('name');titlePreview.textContent=v('title');specialtyPreview.textContent=v('specialty');
  websiteLabelPreview.textContent=v('websiteLabel');instagramPreview.textContent=v('instagramHandle');
  callLink.href='tel:'+v('phone');textLink.href='sms:'+v('phone');emailLink.href='mailto:'+v('email');
  websiteLink.href=v('website');listingsLink.href=v('listings');bookingLink.href=v('booking');instagramLink.href=v('instagram');linkedinLink.href=v('linkedin');
- [websiteLink,listingsLink,bookingLink,instagramLink,linkedinLink].forEach(a=>{a.target='_blank';a.rel='noopener'});
  if(!photoData)avatar.textContent=v('monogram')||'AR';
  qr.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(location.href);
 }
-function showStep(){
- document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
- document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
- document.querySelectorAll('.stepdot').forEach((d,i)=>d.classList.toggle('active',i<step));
- backBtn.disabled=step===1;nextBtn.style.display=step===5?'none':'block';
- if(step===5)buildSummary();
+function saveStudio(){
+ const s={photoData};controls.forEach(id=>s[id]=$(id).value);localStorage.setItem('digitalCardDesignV8',JSON.stringify(s));alert('Design saved on this device.')
 }
-function nextStep(){if(step<5){step++;showStep()}}
-function prevStep(){if(step>1){step--;showStep()}}
-function buildSummary(){
- summary.innerHTML=`<b>${v('name')}</b><br>${v('title')}<br>${v('specialty')}<br><br>
- <b>Theme:</b> ${document.querySelector('.theme.selected b').textContent}<br>
- <b>Phone:</b> ${v('phone')}<br><b>Email:</b> ${v('email')}<br><b>Website:</b> ${v('websiteLabel')}`;
+function loadStudio(){
+ const raw=localStorage.getItem('digitalCardDesignV8');if(!raw){update();return}
+ try{const s=JSON.parse(raw);controls.forEach(id=>{if(s[id]!=null)$(id).value=s[id]});photoData=s.photoData||'';if(photoData)avatar.innerHTML='<img src="'+photoData+'">'}catch(e){}
+ update()
 }
-function currentState(){
- const s={theme:selectedTheme,photoData};ids.forEach(id=>s[id]=v(id));return s
-}
-function saveSetup(){localStorage.setItem('digitalCardWizardV7',JSON.stringify(currentState()));alert('Your setup is saved on this device.')}
-function downloadSetup(){
- const blob=new Blob([JSON.stringify(currentState(),null,2)],{type:'application/json'});
- const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(v('name')||'digital-card').replace(/\s+/g,'-')+'-setup.json';a.click()
-}
-async function copyShareLink(){try{await navigator.clipboard.writeText(location.href);alert('Current link copied.')}catch(e){alert(location.href)}}
+function resetStudio(){localStorage.removeItem('digitalCardDesignV8');location.reload()}
 function downloadVCF(){
  const x=`BEGIN:VCARD
 VERSION:3.0
@@ -255,10 +245,11 @@ TITLE:${v('title')}
 TEL;TYPE=CELL:${v('phone')}
 EMAIL:${v('email')}
 URL:${v('website')}
-END:VCARD`;const b=new Blob([x],{type:'text/vcard'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(v('name')||'contact').replace(/\s+/g,'-')+'.vcf';a.click()
+END:VCARD`;
+ const b=new Blob([x],{type:'text/vcard'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(v('name')||'contact').replace(/\s+/g,'-')+'.vcf';a.click()
 }
-async function shareCard(){if(navigator.share){try{await navigator.share({title:v('name')+' Digital Card',url:location.href})}catch(e){}}else copyShareLink()}
-applyTheme('blackGold');updatePreview();showStep();
+async function shareCard(){if(navigator.share){try{await navigator.share({title:v('name')+' Digital Card',url:location.href})}catch(e){}}else if(navigator.clipboard){navigator.clipboard.writeText(location.href);alert('Link copied')}}
+loadStudio();
 </script>
 </body>
 </html>

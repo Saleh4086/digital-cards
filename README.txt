@@ -1,12 +1,18 @@
-CUSTOMER SETUP WIZARD v7
+DIGITAL CARD DESIGN STUDIO v8
 
-Open index.html.
+Adds:
+- 8 starting presets
+- full background color control
+- panel/button fill control
+- main text color
+- secondary text color
+- accent/main button color
+- border/divider color
+- button text color
+- corner radius slider
+- solid / soft gradient / spotlight gradient backgrounds
+- heading font selector
+- body font selector
+- all previous contact/link/photo functionality
 
-Flow:
-1. Choose one of 4 luxury themes.
-2. Enter name/title/specialty and upload photo/logo.
-3. Enter contact and social links.
-4. Fine-tune colors.
-5. Save setup / download setup JSON / copy current link.
-
-This is the buyer-friendly wizard prototype. It is intentionally one file for easy GitHub Pages testing.
+Open index.html to test.
