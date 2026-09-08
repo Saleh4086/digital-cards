@@ -1,330 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Luxury Digital Card Builder</title>
+<meta name="theme-color" content="#111111">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Digital Business Card</title>
 <style>
-:root{
-  --bg:#0d0d0d; --panel:#151515; --gold:#b79a63; --text:#f6f3ec; --muted:#aaa49b;
-  --line:rgba(183,154,99,.35);
-}
+:root{--g:#B79A63;--b:#111111;--t:#f7f4ee;--m:#aaa49b;--line:rgba(183,154,99,.34)}
 *{box-sizing:border-box}
-body{
-  margin:0;background:#0b0b0b;color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-}
-.app{display:grid;grid-template-columns:minmax(320px,430px) 1fr;min-height:100vh}
-.editor{
-  padding:24px;background:#111;border-right:1px solid #262626;
-  overflow:auto;height:100vh;position:sticky;top:0
-}
-.editor h1{font-family:Georgia,serif;font-weight:500;margin:0 0 8px;font-size:30px}
-.editor p{margin:0 0 22px;color:#aaa;font-size:14px;line-height:1.5}
-.section{border-top:1px solid #252525;padding-top:18px;margin-top:18px}
-.section h2{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
-label{display:block;font-size:12px;color:#ccc;margin:12px 0 6px}
-input,select{
-  width:100%;padding:12px 13px;border-radius:10px;border:1px solid #303030;
-  background:#171717;color:white;font-size:14px;outline:none
-}
-input[type="color"]{height:44px;padding:4px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
-button{
-  border:none;border-radius:11px;padding:13px;font-weight:700;cursor:pointer
-}
-.primary{background:var(--gold);color:#111}
-.secondary{background:#1b1b1b;color:#eee;border:1px solid #333}
-.stage{
-  min-height:100vh;padding:28px;display:flex;align-items:flex-start;justify-content:center;
-  background:radial-gradient(circle at 50% 0%,rgba(183,154,99,.08),transparent 40%),#0a0a0a
-}
-.phone{
-  width:min(100%,430px);background:#111;border:1px solid var(--line);border-radius:30px;
-  box-shadow:0 26px 80px rgba(0,0,0,.5);overflow:hidden
-}
-.cover{
-  padding:28px 24px 22px;position:relative;overflow:hidden
-}
-.cover:after{
-  content:"";position:absolute;right:-55px;top:-65px;width:150px;height:150px;
-  border:1px solid var(--line);border-radius:50%
-}
-.identity{display:flex;gap:16px;align-items:center;margin-bottom:22px}
-.avatar{
-  width:82px;height:82px;border-radius:20px;border:1px solid var(--gold);
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
-  font-family:Georgia,serif;font-size:28px;color:var(--gold);background:#131313;flex:0 0 auto
-}
-.avatar img{width:100%;height:100%;object-fit:cover;display:none}
-.eyebrow{font-size:10px;letter-spacing:2.8px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
-.name{font-family:Georgia,serif;font-size:31px;line-height:1.02;margin:0 0 7px;font-weight:500}
-.role{color:var(--muted);font-size:14px}
-.save{
-  width:100%;background:var(--gold);color:#111;padding:15px;border-radius:14px;
-  font-weight:800;letter-spacing:.4px;margin-bottom:16px
-}
-.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.q{
-  text-decoration:none;color:white;background:#121212;border:1px solid #2d2d2d;
-  padding:13px 6px;border-radius:14px;text-align:center;font-size:12px;font-weight:700
-}
-.icon{width:22px;height:22px;display:block;margin:0 auto 7px;stroke:var(--gold);fill:none;stroke-width:1.8}
-.links{padding:0 24px 8px}
-.link{
-  display:flex;justify-content:space-between;align-items:center;padding:17px 2px;
-  border-top:1px solid #292929;text-decoration:none;color:white
-}
-.link b{font-size:14px}.link small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
-.arrow{font-size:21px;color:var(--gold)}
-.share{
-  margin:8px 24px 0;width:calc(100% - 48px);background:transparent;border:1px solid var(--line);
-  color:var(--gold);padding:13px
-}
-.qrbox{margin:20px 24px 26px;padding-top:18px;border-top:1px solid #292929;display:flex;gap:15px;align-items:center}
-.qrimg{width:90px;height:90px;background:white;border-radius:10px;padding:6px}
-.qrimg img{width:100%;height:100%}
-.qrtext{font-size:12px;color:var(--muted);line-height:1.5}.qrtext b{color:white;display:block;margin-bottom:3px}
-.note{font-size:11px;color:#777;margin-top:14px;line-height:1.4}
-@media (max-width:850px){
-  .app{grid-template-columns:1fr}
-  .editor{position:relative;height:auto;border-right:none;border-bottom:1px solid #262626}
-  .stage{padding:18px}
-}
+body{margin:0;background:#090909;color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;display:flex;justify-content:center}
+.card{width:min(100%,460px);min-height:100vh;background:var(--b);padding:26px 22px 32px;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;width:170px;height:170px;border:1px solid var(--line);border-radius:50%;right:-75px;top:-78px}
+.identity{display:flex;gap:16px;align-items:center;margin:8px 0 22px;position:relative}
+.avatar{width:84px;height:84px;border:1px solid var(--g);border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--g);font:30px Georgia,serif;background:#151515;flex:0 0 auto}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.eyebrow{font-size:10px;letter-spacing:2.7px;color:var(--g);text-transform:uppercase;margin-bottom:8px}
+h1{font:500 31px/1.03 Georgia,serif;margin:0 0 7px}.role{color:var(--m);font-size:14px}
+.save{width:100%;border:0;background:var(--g);color:#111;border-radius:14px;padding:15px;font-weight:800;letter-spacing:.4px;margin-bottom:15px}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:15px}
+.quick a{text-decoration:none;color:white;text-align:center;border:1px solid #303030;border-radius:14px;padding:14px 6px;font-size:12px;font-weight:700;background:#121212}
+.icon{width:22px;height:22px;display:block;margin:0 auto 6px;stroke:var(--g);fill:none;stroke-width:1.8}
+.links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:white;border-top:1px solid #2b2b2b;padding:17px 2px}
+.links b{font-size:14px}.links small{display:block;color:var(--m);margin-top:4px;font-size:12px}.arrow{color:var(--g);font-size:21px}
+.share,.install{width:100%;border-radius:13px;padding:13px;font-weight:800;margin-top:12px}
+.share{background:transparent;border:1px solid var(--line);color:var(--g)}
+.install{background:#1b1b1b;border:1px solid #333;color:white;display:none}
+.qr{border-top:1px solid #2b2b2b;margin-top:18px;padding-top:18px;display:flex;gap:15px;align-items:center}
+.qr img{width:90px;height:90px;background:white;padding:6px;border-radius:10px}.qr p{margin:0;color:var(--m);font-size:12px;line-height:1.5}.qr b{color:white}
+.tip{font-size:11px;color:#777;text-align:center;margin-top:18px}
 </style>
 </head>
 <body>
-<div class="app">
-  <aside class="editor">
-    <h1>Digital Card Builder</h1>
-    <p>Edit the fields below. The live card updates instantly. No code editing required.</p>
-
-    <div class="section">
-      <h2>Identity</h2>
-      <label>Name</label><input id="name" value="Alexandra Reed">
-      <label>Title</label><input id="title" value="Real Estate Advisor">
-      <label>Business / Specialty</label><input id="specialty" value="Luxury Real Estate">
-      <label>Monogram</label><input id="monogram" value="AR" maxlength="4">
-      <label>Photo or Logo</label><input id="photo" type="file" accept="image/*">
+<main class="card">
+  <div class="identity">
+    <div class="avatar" id="avatar">AR</div>
+    <div>
+      <div class="eyebrow" id="specialty"></div>
+      <h1 id="name"></h1>
+      <div class="role" id="title"></div>
     </div>
+  </div>
 
-    <div class="section">
-      <h2>Contact</h2>
-      <label>Phone</label><input id="phone" value="+15551234567">
-      <label>Email</label><input id="email" value="hello@yourbrand.com">
-      <label>Website URL</label><input id="website" value="https://example.com">
-      <label>Website Label</label><input id="websiteLabel" value="yourwebsite.com">
-    </div>
+  <button class="save" id="saveBtn">SAVE CONTACT</button>
 
-    <div class="section">
-      <h2>Links</h2>
-      <label>Listings / Portfolio URL</label><input id="listings" value="https://example.com/listings">
-      <label>Appointment URL</label><input id="book" value="https://example.com/book">
-      <label>Instagram URL</label><input id="instagram" value="https://instagram.com/">
-      <label>Instagram Handle</label><input id="instagramHandle" value="@yourhandle">
-      <label>LinkedIn URL</label><input id="linkedin" value="https://linkedin.com/">
-    </div>
+  <div class="quick">
+    <a id="call"><svg class="icon" viewBox="0 0 24 24"><path d="M6.6 10.8c1.7 3.4 3.2 4.9 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.7 3.8.7.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3.7c0-.6.4-1 1-1h3.3c.6 0 1 .4 1 1 0 1.3.2 2.6.7 3.8.1.4 0 .8-.2 1.1l-2.2 2.2Z"/></svg>Call</a>
+    <a id="text"><svg class="icon" viewBox="0 0 24 24"><path d="M4 5h16v11H7l-3 3V5Z"/></svg>Text</a>
+    <a id="email"><svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg>Email</a>
+  </div>
 
-    <div class="section">
-      <h2>Style</h2>
-      <div class="row">
-        <div><label>Accent Color</label><input id="accent" type="color" value="#b79a63"></div>
-        <div><label>Background</label><input id="background" type="color" value="#111111"></div>
-      </div>
-    </div>
+  <div class="links">
+    <a id="website"><div><b>Website</b><small id="websiteLabel"></small></div><span class="arrow">→</span></a>
+    <a id="listings"><div><b>My Listings / Portfolio</b><small>View current work</small></div><span class="arrow">→</span></a>
+    <a id="booking"><div><b>Book an Appointment</b><small>Schedule a consultation</small></div><span class="arrow">→</span></a>
+    <a id="instagram"><div><b>Instagram</b><small id="instagramHandle"></small></div><span class="arrow">→</span></a>
+    <a id="linkedin"><div><b>LinkedIn</b><small>Connect professionally</small></div><span class="arrow">→</span></a>
+  </div>
 
-    <div class="actions">
-      <button class="secondary" onclick="resetDemo()">Reset</button>
-      <button class="primary" onclick="downloadCard()">Download Card</button>
-    </div>
-    <div class="note">“Download Card” creates a customized HTML file the buyer can host on any simple web host. Save Contact creates a real .vcf contact file.</div>
-  </aside>
+  <button class="share" id="shareBtn">SHARE MY CARD</button>
+  <button class="install" id="installBtn">ADD CARD TO HOME SCREEN</button>
 
-  <section class="stage">
-    <div class="phone" id="card">
-      <div class="cover">
-        <div class="identity">
-          <div class="avatar" id="avatar"><span id="monoPreview">AR</span><img id="photoPreview" alt=""></div>
-          <div>
-            <div class="eyebrow" id="specialtyPreview">Luxury Real Estate</div>
-            <h2 class="name" id="namePreview">Alexandra Reed</h2>
-            <div class="role" id="titlePreview">Real Estate Advisor</div>
-          </div>
-        </div>
-
-        <button class="save" onclick="downloadVCF()">SAVE CONTACT</button>
-
-        <div class="quick">
-          <a class="q" id="callLink" href="tel:+15551234567">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M6.6 10.8c1.7 3.4 3.2 4.9 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.7 3.8.7.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3.7c0-.6.4-1 1-1h3.3c.6 0 1 .4 1 1 0 1.3.2 2.6.7 3.8.1.4 0 .8-.2 1.1l-2.2 2.2Z"/></svg>Call
-          </a>
-          <a class="q" id="textLink" href="sms:+15551234567">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M4 5h16v11H7l-3 3V5Z"/></svg>Text
-          </a>
-          <a class="q" id="emailLink" href="mailto:hello@yourbrand.com">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg>Email
-          </a>
-        </div>
-      </div>
-
-      <div class="links">
-        <a class="link" id="websiteLink" href="https://example.com" target="_blank">
-          <div><b>Website</b><small id="websiteLabelPreview">yourwebsite.com</small></div><span class="arrow">→</span>
-        </a>
-        <a class="link" id="listingsLink" href="https://example.com/listings" target="_blank">
-          <div><b>My Listings / Portfolio</b><small>View current work</small></div><span class="arrow">→</span>
-        </a>
-        <a class="link" id="bookLink" href="https://example.com/book" target="_blank">
-          <div><b>Book an Appointment</b><small>Schedule a consultation</small></div><span class="arrow">→</span>
-        </a>
-        <a class="link" id="instagramLink" href="https://instagram.com/" target="_blank">
-          <div><b>Instagram</b><small id="instagramPreview">@yourhandle</small></div><span class="arrow">→</span>
-        </a>
-        <a class="link" id="linkedinLink" href="https://linkedin.com/" target="_blank">
-          <div><b>LinkedIn</b><small>Connect professionally</small></div><span class="arrow">→</span>
-        </a>
-      </div>
-
-      <button class="share" onclick="shareCard()">SHARE MY CARD</button>
-
-      <div class="qrbox">
-        <div class="qrimg"><img id="qr" alt="QR code"></div>
-        <div class="qrtext"><b>Scan to open this card</b>Use the QR on print materials, email signatures, flyers, signs, and social media.</div>
-      </div>
-    </div>
-  </section>
-</div>
-
+  <div class="qr">
+    <img id="qr" alt="QR code">
+    <p><b>Scan to open this card</b><br>This QR automatically points to the live card URL after publishing.</p>
+  </div>
+  <div class="tip">On iPhone: Share → Add to Home Screen saves the card like an app.</div>
+</main>
 <script>
-const ids = ["name","title","specialty","monogram","phone","email","website","websiteLabel","listings","book","instagram","instagramHandle","linkedin","accent","background"];
-ids.forEach(id => document.getElementById(id).addEventListener("input", update));
-document.getElementById("photo").addEventListener("change", handlePhoto);
-
-let photoData = "";
-
-function v(id){ return document.getElementById(id).value.trim(); }
-
-function update(){
-  document.documentElement.style.setProperty("--gold", v("accent"));
-  document.documentElement.style.setProperty("--bg", v("background"));
-  document.getElementById("card").style.background = v("background");
-
-  namePreview.textContent = v("name");
-  titlePreview.textContent = v("title");
-  specialtyPreview.textContent = v("specialty");
-  monoPreview.textContent = v("monogram") || initials(v("name"));
-  websiteLabelPreview.textContent = v("websiteLabel");
-  instagramPreview.textContent = v("instagramHandle");
-
-  callLink.href = "tel:" + v("phone");
-  textLink.href = "sms:" + v("phone");
-  emailLink.href = "mailto:" + v("email");
-  websiteLink.href = v("website");
-  listingsLink.href = v("listings");
-  bookLink.href = v("book");
-  instagramLink.href = v("instagram");
-  linkedinLink.href = v("linkedin");
-
-  const qrTarget = encodeURIComponent(v("website") || "https://example.com");
-  qr.src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + qrTarget;
-
-  saveState();
+let P={}, deferredPrompt=null;
+const $=id=>document.getElementById(id);
+fetch('profile.json').then(r=>r.json()).then(p=>{P=p;render()});
+function render(){
+  document.documentElement.style.setProperty('--g',P.accent||'#B79A63');
+  document.documentElement.style.setProperty('--b',P.background||'#111111');
+  $('name').textContent=P.name||'';
+  $('title').textContent=P.title||'';
+  $('specialty').textContent=P.specialty||'';
+  $('websiteLabel').textContent=P.websiteLabel||P.website||'';
+  $('instagramHandle').textContent=P.instagramHandle||'';
+  $('call').href='tel:'+(P.phone||'');
+  $('text').href='sms:'+(P.phone||'');
+  $('email').href='mailto:'+(P.email||'');
+  for (const k of ['website','listings','booking','instagram','linkedin']) {
+    $(k).href=P[k]||'#'; $(k).target='_blank'; $(k).rel='noopener';
+  }
+  if(P.photo){$('avatar').innerHTML='<img alt="" src="'+P.photo+'">'} else $('avatar').textContent=P.monogram||'AR';
+  $('qr').src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(location.href);
+  document.title=(P.name||'Digital')+' | Digital Card';
 }
-function initials(n){ return n.split(/\s+/).map(x=>x[0]||"").join("").slice(0,2).toUpperCase(); }
-function handlePhoto(e){
-  const f = e.target.files[0];
-  if(!f) return;
-  const r = new FileReader();
-  r.onload = ev => {
-    photoData = ev.target.result;
-    photoPreview.src = photoData;
-    photoPreview.style.display = "block";
-    monoPreview.style.display = "none";
-    saveState();
-  };
-  r.readAsDataURL(f);
-}
-function downloadVCF(){
-  const parts=v("name").split(" "); const last=parts.pop()||""; const first=parts.join(" ");
-  const card=`BEGIN:VCARD
+$('saveBtn').onclick=()=>{
+  const parts=(P.name||'').trim().split(/\s+/), last=parts.pop()||'', first=parts.join(' ');
+  const v=`BEGIN:VCARD
 VERSION:3.0
 N:${last};${first};;;
-FN:${v("name")}
-TITLE:${v("title")}
-TEL;TYPE=CELL:${v("phone")}
-EMAIL:${v("email")}
-URL:${v("website")}
+FN:${P.name||''}
+TITLE:${P.title||''}
+TEL;TYPE=CELL:${P.phone||''}
+EMAIL:${P.email||''}
+URL:${P.website||''}
 END:VCARD`;
-  const blob=new Blob([card],{type:"text/vcard"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
-  a.download=v("name").replace(/\s+/g,"-")+"-Contact.vcf";a.click();URL.revokeObjectURL(a.href);
-}
-async function shareCard(){
-  const d={title:v("name")+" Digital Card",text:"Save my digital business card",url:location.href};
-  if(navigator.share){try{await navigator.share(d)}catch(e){}}
-  else{try{await navigator.clipboard.writeText(location.href);alert("Card link copied.")}catch(e){alert(location.href)}}
-}
-function saveState(){
-  const state={};ids.forEach(id=>state[id]=v(id));state.photoData=photoData;
-  localStorage.setItem("luxuryCardState",JSON.stringify(state));
-}
-function loadState(){
-  const raw=localStorage.getItem("luxuryCardState"); if(!raw){update(); return;}
-  try{
-    const s=JSON.parse(raw);ids.forEach(id=>{if(s[id]!=null)document.getElementById(id).value=s[id]});
-    photoData=s.photoData||"";
-    if(photoData){photoPreview.src=photoData;photoPreview.style.display="block";monoPreview.style.display="none"}
-  }catch(e){}
-  update();
-}
-function resetDemo(){ localStorage.removeItem("luxuryCardState"); location.reload(); }
-
-function downloadCard(){
-  const state={};ids.forEach(id=>state[id]=v(id));state.photoData=photoData;
-  const exportHtml = buildStandalone(state);
-  const blob=new Blob([exportHtml],{type:"text/html"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
-  a.download=(v("name")||"digital-card").replace(/\s+/g,"-")+".html";a.click();URL.revokeObjectURL(a.href);
-}
-function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
-function buildStandalone(s){
-  const av = s.photoData
-    ? `<img src="${s.photoData}" style="width:100%;height:100%;object-fit:cover">`
-    : `<span>${esc(s.monogram||initials(s.name))}</span>`;
-  const qr="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+encodeURIComponent(s.website||"https://example.com");
-  const standalone=`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(s.name)} | Digital Card</title>
-<style>
-:root{--g:${esc(s.accent)};--b:${esc(s.background)};--t:#f6f3ec;--m:#aaa49b}
-*{box-sizing:border-box}body{margin:0;background:#0b0b0b;color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;display:flex;justify-content:center}
-.c{width:min(100%,430px);min-height:100vh;background:var(--b);padding:28px 24px}
-.id{display:flex;gap:16px;align-items:center;margin-bottom:22px}.a{width:82px;height:82px;border:1px solid var(--g);border-radius:20px;display:flex;align-items:center;justify-content:center;overflow:hidden;font:28px Georgia;color:var(--g)}
-.e{font-size:10px;letter-spacing:2.7px;color:var(--g);text-transform:uppercase;margin-bottom:8px}h1{font:500 31px/1.02 Georgia;margin:0 0 7px}.r{color:var(--m);font-size:14px}
-.save,.share{width:100%;padding:15px;border-radius:14px;font-weight:800;border:none}.save{background:var(--g);color:#111;margin-bottom:16px}.share{background:transparent;color:var(--g);border:1px solid var(--g);margin-top:12px}
-.q{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.q a,.l a{text-decoration:none;color:white}.q a{text-align:center;border:1px solid #303030;border-radius:14px;padding:14px 4px;font-weight:700;font-size:12px}
-.l{margin-top:18px}.l a{display:flex;justify-content:space-between;border-top:1px solid #303030;padding:17px 2px}.l small{display:block;color:var(--m);margin-top:4px}.ar{color:var(--g);font-size:21px}
-.qr{margin-top:20px;border-top:1px solid #303030;padding-top:18px;display:flex;gap:15px;align-items:center}.qr img{width:90px;height:90px;background:white;padding:6px;border-radius:10px}.qr p{font-size:12px;color:var(--m);line-height:1.5}.qr b{color:white}
-</style></head><body><main class="c">
-<div class="id"><div class="a">${av}</div><div><div class="e">${esc(s.specialty)}</div><h1>${esc(s.name)}</h1><div class="r">${esc(s.title)}</div></div></div>
-<button class="save" onclick="vcf()">SAVE CONTACT</button>
-<div class="q"><a href="tel:${esc(s.phone)}">Call</a><a href="sms:${esc(s.phone)}">Text</a><a href="mailto:${esc(s.email)}">Email</a></div>
-<div class="l">
-<a href="${esc(s.website)}"><div><b>Website</b><small>${esc(s.websiteLabel)}</small></div><span class="ar">→</span></a>
-<a href="${esc(s.listings)}"><div><b>My Listings / Portfolio</b><small>View current work</small></div><span class="ar">→</span></a>
-<a href="${esc(s.book)}"><div><b>Book an Appointment</b><small>Schedule a consultation</small></div><span class="ar">→</span></a>
-<a href="${esc(s.instagram)}"><div><b>Instagram</b><small>${esc(s.instagramHandle)}</small></div><span class="ar">→</span></a>
-<a href="${esc(s.linkedin)}"><div><b>LinkedIn</b><small>Connect professionally</small></div><span class="ar">→</span></a>
-</div>
-<button class="share" onclick="share()">SHARE MY CARD</button>
-<div class="qr"><img src="${qr}"><p><b>Scan to open this card</b><br>Use this QR on print and digital marketing.</p></div>
-<script>
-function vcf(){const x=\`BEGIN:VCARD\\nVERSION:3.0\\nFN:${esc(s.name)}\\nTITLE:${esc(s.title)}\\nTEL;TYPE=CELL:${esc(s.phone)}\\nEMAIL:${esc(s.email)}\\nURL:${esc(s.website)}\\nEND:VCARD\`;const b=new Blob([x],{type:"text/vcard"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="${esc(s.name).replace(/\s+/g,"-")}-Contact.vcf";a.click()}
-async function share(){if(navigator.share){try{await navigator.share({title:"${esc(s.name)} Digital Card",url:location.href})}catch(e){}}else{navigator.clipboard&&navigator.clipboard.writeText(location.href)}}
-<\/script></main></body></html>`;
-  return standalone;
-}
-loadState();
+  const b=new Blob([v],{type:'text/vcard'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download=(P.name||'contact').replace(/\s+/g,'-')+'.vcf';a.click();URL.revokeObjectURL(a.href);
+};
+$('shareBtn').onclick=async()=>{
+  if(navigator.share){try{await navigator.share({title:document.title,text:'Save my digital business card',url:location.href})}catch(e){}}
+  else {try{await navigator.clipboard.writeText(location.href);alert('Card link copied.')}catch(e){alert(location.href)}}
+};
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').style.display='block'});
+$('installBtn').onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$('installBtn').style.display='none'}};
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
 </script>
-</body>
-</html>
+</body></html>

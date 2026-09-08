@@ -1,0 +1,38 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Edit Your Digital Card</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;background:#101010;color:#eee;margin:0;padding:24px}
+main{max-width:720px;margin:auto}h1{font-family:Georgia,serif;font-weight:500}p{color:#aaa;line-height:1.5}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}
+label{font-size:12px;color:#bbb;display:block;margin:10px 0 5px}input{width:100%;box-sizing:border-box;padding:12px;background:#181818;border:1px solid #333;border-radius:9px;color:#fff}
+button{margin-top:20px;padding:14px 18px;background:#B79A63;border:0;border-radius:10px;font-weight:800}
+pre{background:#171717;padding:15px;border-radius:10px;overflow:auto;color:#ddd}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+</style></head><body><main>
+<h1>Card Setup</h1>
+<p>Fill in your information, then click <b>Generate profile.json</b>. Replace the sample profile.json in the website folder with the downloaded file and publish the folder.</p>
+<div class="grid">
+<div><label>Name</label><input id="name" value="Alexandra Reed"></div>
+<div><label>Title</label><input id="title" value="Real Estate Advisor"></div>
+<div><label>Business / Specialty</label><input id="specialty" value="Luxury Real Estate"></div>
+<div><label>Monogram</label><input id="monogram" value="AR"></div>
+<div><label>Phone</label><input id="phone" value="+15551234567"></div>
+<div><label>Email</label><input id="email" value="hello@yourbrand.com"></div>
+<div class="full"><label>Website</label><input id="website" value="https://example.com"></div>
+<div><label>Website Label</label><input id="websiteLabel" value="yourwebsite.com"></div>
+<div><label>Listings / Portfolio</label><input id="listings" value="https://example.com/listings"></div>
+<div><label>Booking Link</label><input id="booking" value="https://example.com/book"></div>
+<div><label>Instagram URL</label><input id="instagram" value="https://instagram.com/"></div>
+<div><label>Instagram Handle</label><input id="instagramHandle" value="@yourhandle"></div>
+<div><label>LinkedIn URL</label><input id="linkedin" value="https://linkedin.com/"></div>
+<div><label>Accent Color</label><input id="accent" value="#B79A63"></div>
+<div><label>Background</label><input id="background" value="#111111"></div>
+<div class="full"><label>Photo URL (optional)</label><input id="photo" placeholder="https://..."></div>
+</div>
+<button onclick="go()">GENERATE profile.json</button>
+<pre id="preview"></pre>
+<script>
+const ids=['name','title','specialty','monogram','phone','email','website','websiteLabel','listings','booking','instagram','instagramHandle','linkedin','accent','background','photo'];
+function go(){let p={};ids.forEach(i=>p[i]=document.getElementById(i).value.trim());let s=JSON.stringify(p,null,2);preview.textContent=s;let b=new Blob([s],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='profile.json';a.click();URL.revokeObjectURL(a.href)}
+</script></main></body></html>
